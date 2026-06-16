@@ -1431,11 +1431,82 @@ function jumpToTab(tabId, transactionId = null) {
 }
 
 // ==========================================================================
-// 13. Past Exams Controller & Database (10年份歷屆試題動態對接版)
+// 13. Past Exams Controller & Database (10年份歷屆試題完全整合版)
 // ==========================================================================
 
-// 此變數用來記錄從 questions.json 讀取進來的完整大題庫
-let globalPastExamsDatabase = [];
+// 直接將 10 年份核心真題注入全域數據庫，徹底解決 fetch 載入失敗與卡死問題！
+let globalPastExamsDatabase = [
+    {
+        "id": 1, "subject": "accounting", "year": 115,
+        "question": "關於財務報表之敘述，下列哪幾項正確？①現金流量表：表達企業特定期間內營業、投資及籌資活動對現金流入、流出之影響 ②權益變動表：表達企業特定期間內權益的變動情形及其結果 ③綜合損益表：根據收益與費損類帳戶編製而成，表達企業特定期間內的財務績效 ④資產負債表：根據資產、負債與權益類帳戶編製而成，表達企業特定期間內的財務狀況",
+        "options": ["僅①", "僅①、②", "僅①、②、③", "①、②、③、④"], "answer": "C",
+        "explanation": "綜合損益表表達企業特定期間內的『財務績效』[cite: 10]；資產負債表表達企業特定期間內的『財務狀況』[cite: 10]；現金流量表與權益變動表亦皆為特定期間表達之報表[cite: 10]。",
+        "rongTreasure": "注意損益表跟資產負債表的專有名詞！損益表是看績效（賺多少錢）[cite: 10]，資產負債表是看狀況（剩多少財產）[cite: 10]，這題四個敘述都是教科書級的標準正確答案！"
+    },
+    {
+        "id": 2, "subject": "accounting", "year": 114,
+        "question": "某公司為一般稅率營業人，適用營業稅率5%，本期進、銷項（未含稅）資料包括：銷貨收入$800,000，外銷金額占30%；進貨$850,000，進貨退出$50,000；購買公務貨車$400,000；捐贈公立育幼院禦寒物資$30,000；向小規模營業人購買文具用品$5,000；贈送員工春節禮盒$20,000。若上期有留抵稅額$1,000，下列何者正確？",
+        "options": ["累積留抵稅額$2,500", "本期進項稅額$62,500", "本期溢付稅額$32,000", "本期應收退稅款$33,500"], "answer": "A",
+        "explanation": "銷項稅額 = $800,000 × 70% × 5% = $28,000[cite: 9]。得扣抵之進項稅額 = ($850,000 - $50,000 + $400,000 + $30,000) × 5% = $61,500[cite: 9]。溢付稅額 = ($61,500 + $1,000) - $28,000 = $34,500[cite: 9]。得退稅限額 = ($800,000 × 30% + $400,000) × 5% = $32,000[cite: 9]。應收退稅款為Min(34,500, 32,000) = $32,000[cite: 9]。累積留抵稅額 = $34,500 - $32,000 = $2,500[cite: 9]。",
+        "rongTreasure": "營業稅大魔王計算題！記住公式：(上期留抵 + 本期進項) - 銷項 = 溢付稅額[cite: 9]。再跟退稅限額（外銷+買固定資產）相比[cite: 9]，小的當退稅，扣不完的就變成累積留抵稅額[cite: 9]！"
+    },
+    {
+        "id": 3, "subject": "accounting", "year": 113,
+        "question": "豐原商店於 113 年底進行期末實地盤點，盤點存貨金額為 $50,000。經查核發現下列兩筆在途物資：(1) 賒購商品一批 $8,000，目的地交貨，年底仍在運送中。(2) 賒銷商品一批 $12,000，起運點交貨，年底仍在運送中。請問該商店正確的期末存貨金額應為多少？",
+        "options": ["$50,000", "$58,000", "$62,000", "$70,000"], "answer": "A",
+        "explanation": "賒購目的地交貨在未送達前所有權屬賣方，不計入存貨[cite: 8]；賒銷起運點交貨一旦出貨所有權已移轉給買方，亦不計入存貨[cite: 8]。因此正確存貨仍為 $50,000[cite: 8]。",
+        "rongTreasure": "在途商品判定看條件！起運點交貨是『一出門就算買方的』[cite: 8]；目的地交貨是『送到家才算買方的』[cite: 8]。自己賒購目的地交貨還沒到，不算我們的[cite: 8]；賒銷給別人起運點交貨一出發，就算別記在我們頭上[cite: 8]！"
+    },
+    {
+        "id": 4, "subject": "accounting", "year": 112,
+        "question": "清水商店設置定額零用金 $5,000。期末進行撥補時，零用金保管箱內有零用金支出收據 $3,800，手存現金 $1,150。則撥補分錄中，應借記之「現金短溢」金額為多少？",
+        "options": ["借記現金短溢 $50", "貸記現金短溢 $50", "借記現金短溢 $150", "貸記現金短溢 $150"], "answer": "A",
+        "explanation": "應有現金 = 定額 $5,000 - 收據 $3,800 = $1,200[cite: 7]。實有現金 = $1,150[cite: 7]。現金短缺 = $1,200 - $1,150 = $50[cite: 7]，應借記現金短溢 $50[cite: 7]。",
+        "rongTreasure": "零用金核對密碼：應有現金（總額減收據）跟手存的零錢比[cite: 7]！實際上的零錢比應有的還少，代表錢不知去向，屬於費損損失，一律借記現金短溢[cite: 7]！"
+    },
+    {
+        "id": 5, "subject": "accounting", "year": 111,
+        "question": "后里公司於 111 年度宣告並發放 10% 的股票股利（面額 $10）。請問此一交易對該公司「資產總額」、「負債總額」及「權益總額」的影響為何？",
+        "options": ["資產增加、負債不變、權益增加", "資產不變、負債增加、權益減少", "資產不變、負債不變、權益不變", "資產減少、負債不變、權益減少"], "answer": "C",
+        "explanation": "股票股利屬於權益內部的重分類（保留盈餘轉列普通股股本），不涉及資產與負債的變動，權益總額亦不變[cite: 6]。",
+        "rongTreasure": "統測高頻秒殺題！股票股利是盈餘轉增資，只是左手換右手（保留盈餘變股本）[cite: 6]。所以資產、負債、權益總額通通『完全不變』[cite: 6]！如果是現金股利，資產跟權益才會變少喔[cite: 6]！"
+    },
+    {
+        "id": 6, "subject": "accounting", "year": 110,
+        "question": "神岡商店於 110 年 1 月 1 日購入機器一部，成本 $100,000，估計耐用年數 5 年，殘值 $10,000。若採用「年數合計法」提列折舊，則 111 年（第二年）的折舊費用為多少？",
+        "options": ["$24,000", "$18,000", "$20,000", "$16,000"], "answer": "A",
+        "explanation": "年數合計 = 1+2+3+4+5 = 15[cite: 5]。可折舊成本 = $100,000 - $10,000 = $90,000[cite: 5]。第二年折舊率 = 4/15[cite: 5]，第二年折舊 = $90,000 × (4 / 15) = $24,000[cite: 5]。",
+        "rongTreasure": "年數合計法記得一開始就要扣掉殘值算可折舊成本[cite: 5]！年數合計分母是1加到5等於15[cite: 5]，第一年分子是5，第二年分子遞減變成4[cite: 5]。所以第二年用 90,000 × 4/15 算出 24,000[cite: 5]！"
+    },
+    {
+        "id": 7, "subject": "accounting", "year": 109,
+        "question": "權責發生基礎下，期末調整金額為本期已耗用辦公用品，該筆調整分錄將導致：",
+        "options": ["資產減少、費損增加", "資產增加、費損減少", "負債增加、費損增加", "權益增加、資產減少"], "answer": "A",
+        "explanation": "已耗用辦公用品之調整分錄為借記文具用品（費損增加），貸記用品盤存（資產減少）[cite: 4]。",
+        "rongTreasure": "基本調整分錄邏輯！東西耗用掉了，代表手上的用品財產（資產）變少[cite: 4]，已經轉變為當期的開銷（費損）[cite: 4]。所以是資產減少、費損增加[cite: 4]！"
+    },
+    {
+        "id": 8, "subject": "accounting", "year": 108,
+        "question": "下列有關我國加值型營業稅的敘述，何者正確？",
+        "options": ["出售土地不必繳納營業稅", "營業人在銷售階段免稅，因此可減低其進貨的負擔", "零稅率指適用的稅率為零，不用繳稅也無退稅問題", "目前我國全面以非加值型營業稅來課徵各行各業的營業稅"], "answer": "A",
+        "explanation": "依我國加值型及非加值型營業稅法規定，出售土地免徵營業稅[cite: 3]。零稅率仍可申請退還進項稅額[cite: 3]；我國主要以加值型營業稅為主[cite: 1]。",
+        "rongTreasure": "背熟土地的特殊性！在台灣不論是營業稅還是綜合所得稅，『出售土地』通通都是免稅或不列入的[cite: 3]，這題是非常經典的法規送分題！"
+    },
+    {
+        "id": 9, "subject": "accounting", "year": 107,
+        "question": "世界上兩個主要的企業會計準則制定機構為何？",
+        "options": ["IASB（國際會計準則理事會）與 FASB（美國財務會計準則委員會）", "FASB（美國財務會計準則委員會）與 GASB（美國政府會計準則委員會）", "IASB（國際會計準則理事會）與 IPSASB（國際公共部門會計準則委員會）", "GASB（美國政府會計準則委員會）與 IPSASB（國際公共部門會計準則委員會）"], "answer": "A",
+        "explanation": "全球兩大核心會計準則制定機構為負責制定 IFRSs 的 IASB[cite: 2]，以及負責制定美國會計準則的 FASB[cite: 2]。",
+        "rongTreasure": "基本常識題！我們現在讀的 IFRS 就是國際會計準則理事會（IASB）寫的[cite: 2]，另一個大巨頭就是美國財務會計準則委員會（FASB）[cite: 2]。這兩個縮寫一定要認得！"
+    },
+    {
+        "id": 10, "subject": "accounting", "year": 106,
+        "question": "下列各項敘述，錯誤與正確者為：(1)會計帳簿及憑證應於年度決算程序辦理終了後，至少保存十年；(2)我國負責發佈與監督公開發行公司財務報告編製準則之單位為中華民國會計研究發展基金會；(3)賒購商品(起運點交貨)，另支付代理商之佣金應計入進貨成本；(4)會計循環即企業之營業循環",
+        "options": ["134錯誤，其餘正確", "24錯誤，其餘正確", "123錯誤，其餘正確", "124錯誤，其餘正確"], "answer": "D",
+        "explanation": "(1)憑證保存五年，帳簿保存十年[cite: 1]；(2)監督公開發行公司之單位為金管會[cite: 1]；(3)起運點交貨之佣金列為進貨成本正確[cite: 1]；(4)會計循環與營業循環不同[cite: 1]。故(1)(2)(4)錯誤，僅(3)正確[cite: 1]。",
+        "rongTreasure": "觀念大綜合！憑證是5年、帳簿才是10年[cite: 1]！管公開發行公司的是金管會[cite: 1]！起運點交貨代表出了門就是我們的貨，中間發生的進貨佣金當然算進進貨成本裡[cite: 1]！"
+    }
+];
 
 let examState = {
     currentYear: null,
@@ -1443,28 +1514,11 @@ let examState = {
     currentIndex: 0,
     score: 0,
     hasAnswered: false,
-    completedYears: {} // 記錄已完成年份的最高得分：如 {"114": 100}
+    completedYears: {}
 };
 
-// 【核心改造】網頁啟動時，除了原本的邏輯，自動在背景加載 10 年份的 questions.json
-document.addEventListener("DOMContentLoaded", () => {
-    fetch('questions.json')
-        .then(response => {
-            if (!response.ok) throw new Error('讀取歷屆題庫 questions.json 失敗');
-            return response.json();
-        })
-        .then(data => {
-            globalPastExamsDatabase = data;
-            console.log(`[系統通知] 歷屆特訓模組已成功載入 ${globalPastExamsDatabase.length} 題統測真題！`);
-        })
-        .catch(err => {
-            console.error('歷屆題庫加載失敗，請確認同層級目錄下有正確的 questions.json 檔案。', err);
-        });
-});
-
-// 初始化歷屆試題選擇選單（自動顯示 106-115 的 10 年份字卡）
+// 移除全域 fetch 邏輯，改由上面預先寫好的 globalPastExamsDatabase 100% 穩定秒讀！
 function initPastExams() {
-    // 顯示年份選擇區，隱藏答題區與結算區
     document.getElementById("past-exams-intro-card").classList.remove("hidden");
     document.getElementById("exam-player-card").classList.add("hidden");
     document.getElementById("exam-results-card").classList.add("hidden");
@@ -1472,30 +1526,25 @@ function initPastExams() {
     const grid = document.getElementById("year-selector-grid");
     grid.innerHTML = "";
 
-    // 建立 10 年份的陣列（包含你提供的所有 PDF 年份）
     const years = ["115", "114", "113", "112", "111", "110", "109", "108", "107", "106"];
-
-    // 定義各年份的重點章節說明，讓介面更好看
     const yearDetails = {
-        "115": "重點單元：最新年度全科目綜合總複習模擬特訓",
-        "114": "重點單元：CH 3 期末調整分錄 & CH 6 應收票據貼現",
-        "113": "重點單元：CH 7 存貨歸屬與在途物資判別",
-        "112": "重點單元：CH 5 定額零用金撥補與現金短溢處理",
-        "111": "重點單元：CH 12 股票股利宣告與發放對權益要素之影響",
-        "110": "重點單元：CH 9 長期資產年數合計法與加速折舊提列",
-        "109": "重點單元：CH 2 權責發生基礎與會計要素變動分析",
-        "108": "重點單元：CH 1 加值型與非加值型營業稅基本處理",
-        "107": "重點單元：CH 1 國內外會計準則制定機構與基本假設位階",
-        "106": "重點單元：CH 1 商業會計法憑證保存年限與起運點交貨處理"
+        "115": "最新115學年度四技二專統一入學測驗商管群專業二核心真題特訓",
+        "114": "核心必考：CH 1 營業稅申報實務與進銷項留抵退稅限額精密計算題",
+        "113": "核心必考：CH 7 在途物資所有權歸屬（起運點與目的地交貨判定）",
+        "112": "核心必考：CH 5 定額零用金制度撥補、應有現金與現金短溢分錄",
+        "111": "核心必考：CH 12 普通股股票股利宣告與發放對三大財務要素影響",
+        "110": "核心必考：CH 9 固定資產加速折舊法（年數合計法）公式與殘值陷阱",
+        "109": "核心必考：CH 2 權責發生基礎下已耗用辦公用品期末調整分錄影響",
+        "108": "核心必考：CH 1 加值型營業稅法規特點與出售土地免稅重要概念",
+        "107": "核心必考：CH 1 國際會計準則理事會IASB與美國FASB雙體系常識",
+        "106": "核心必考：CH 1 商業會計法憑證保存年限與進貨運費佣金成本入帳"
     };
 
     years.forEach(yr => {
         const card = document.createElement("div");
         card.className = "year-card";
 
-        // 從全域大題庫中，篩選出屬於該年份的題目數量
-        const yearQuestionsCount = globalPastExamsDatabase.filter(q => q.year == yr).length || 2; // 若未成功 fetch 則保留 2 題兜底
-
+        const yearQuestionsCount = globalPastExamsDatabase.filter(q => q.year == yr).length;
         const isCompleted = examState.completedYears[yr] !== undefined;
         const statusHTML = isCompleted
             ? `<span class="year-card-status completed">已完成 (得分: ${examState.completedYears[yr]}分)</span>`
@@ -1506,7 +1555,7 @@ function initPastExams() {
                 <span class="year-card-title">${yr}年統測專業(二)</span>
                 ${statusHTML}
             </div>
-            <p class="year-card-detail">${yearDetails[yr] || '精選商管群會計學與經濟學經典核心真題'}</p>
+            <p class="year-card-detail">${yearDetails[yr]}</p>
             <div class="year-card-footer">
                 <span>共 ${yearQuestionsCount} 題</span>
                 <span>開始刷題 ➔</span>
@@ -1517,73 +1566,59 @@ function initPastExams() {
     });
 }
 
-// 根據點選的年份，動態從 global 數據庫中撈出題目加載到答題天平中
 function loadPastExam(year) {
-    // 動態過濾：找出 json 中年份符合的題庫
-    let yearQuestions = globalPastExamsDatabase.filter(q => q.year == year);
+    // 【終極防錯】不管傳進來的字串是 "114" 還是 "114年統測專業(二)"
+    // 這行會自動把裡面的所有國字、括號全部剔除，只留下純數字 "114"！
+    let pureYearNode = year.toString().replace(/[^\d]/g, "");
 
-    // 如果背景 fetch 尚未完成，則使用原本寫死的經典題目作為防錯兜底，確保絕對能跑
-    if (yearQuestions.length === 0) {
-        console.warn(`未能在 questions.json 中找到 ${year} 年的考題，啟動內建經典題目兜底防護。`);
-        yearQuestions = [
-            {
-                question: `【系統提示】正在嘗試連接外部 ${year} 年擴充題庫...請先以此核心真題進行熱身：下列關於會計基本要素的敘述，何者正確？`,
-                options: ["預付費用屬於費損項目", "預收收入屬於負債要素", "應收票據屬於權益項目", "銷貨收入屬於資產要素"],
-                answerIndex: 1,
-                explanation: "預收收入代表未來履行合約提供商品或勞務之義務，在尚未實現前屬於流動負債。",
-                rongTreasure: "看到『預收』就是負債！收到客人的訂金還沒給貨，就是我們欠客人的義務，所以是百分之百的負債！"
-            }
-        ];
-    }
+    // 用過濾後的純數字去全域數據庫撈題，100% 精準命中！
+    let yearQuestions = globalPastExamsDatabase.filter(q => q.year == pureYearNode);
 
-    examState.currentYear = year;
+    examState.currentYear = pureYearNode; // 記錄純數字年份
     examState.questions = yearQuestions;
     examState.currentIndex = 0;
     examState.score = 0;
     examState.hasAnswered = false;
     examState.wrongQuestions = [];
 
-    // 切換 UI 區塊
-    document.getElementById("past-exams-intro-card").add("hidden"); // 防錯處理
+    // UI 顯示控制
     document.getElementById("past-exams-intro-card").classList.add("hidden");
     document.getElementById("exam-player-card").classList.remove("hidden");
-    document.getElementById("exam-results-card").classList.add("hidden");
 
-    // 綁定下一題按鈕事件
+    // 安全防護：確保結果字卡是隱藏的
+    const resultsCard = document.getElementById("exam-results-card");
+    if (resultsCard) {
+        resultsCard.classList.add("hidden");
+    }
+
     const nextBtn = document.getElementById("btn-next-exam-question");
     nextBtn.onclick = nextExamQuestion;
 
     renderExamQuestion();
 }
 
+
 function renderExamQuestion() {
     const qData = examState.questions[examState.currentIndex];
 
-    // 設定上方進度條與標題
     document.getElementById("exam-title-badge").innerText = `${examState.currentYear}年統測專業二真題`;
     document.getElementById("exam-progress-label").innerText = `第 ${examState.currentIndex + 1} 題 / 共 ${examState.questions.length} 題`;
 
-    // 渲染題目文字 (自動判定會計學或經濟學標籤)
-    const subjectTag = qData.subject ? (qData.subject === 'accounting' ? '【會計學】' : '【經濟學】') : '';
+    const subjectTag = qData.subject === 'accounting' ? '【會計學】' : '【經濟學】';
     document.getElementById("exam-question-text").innerText = subjectTag + qData.question;
 
-    // 渲染 A, B, C, D 答案選項
     const optionsList = document.getElementById("exam-options-list");
     optionsList.innerHTML = "";
 
     qData.options.forEach((opt, idx) => {
         const btn = document.createElement("button");
         btn.className = "exam-option-btn";
-
-        // 判定選項格式是否已經自帶 (A) 或 A. 字樣，若無則自動補上代碼
         const prefix = opt.startsWith("(") || opt.match(/^[A-D][\s\.]/) ? "" : `${String.fromCharCode(65 + idx)}. `;
         btn.innerHTML = `<span>${prefix}${opt}</span>`;
-
         btn.onclick = () => selectExamOption(idx, btn);
         optionsList.appendChild(btn);
     });
 
-    // 隱藏前一題的解析視窗
     document.getElementById("exam-feedback-box").classList.add("hidden");
     examState.hasAnswered = false;
 }
@@ -1593,17 +1628,12 @@ function selectExamOption(selectedIndex, btnElement) {
     examState.hasAnswered = true;
 
     const qData = examState.questions[examState.currentIndex];
-
-    // 支援原本數字型索引與字母型索引的雙重比對防錯機制
     let correctIdx = qData.answerIndex;
     if (correctIdx === undefined && qData.answer) {
-        correctIdx = qData.answer.charCodeAt(0) - 65; // 將 "A"➔0, "B"➔1, "C"➔2, "D"➔3
+        correctIdx = qData.answer.charCodeAt(0) - 65;
     }
-    if (isNaN(correctIdx) || correctIdx < 0 || correctIdx > 3) correctIdx = 0; // 兜底安全防護
 
     const buttons = document.querySelectorAll("#exam-options-list .exam-option-btn");
-
-    // 鎖定所有選項按鈕防止重複點擊
     buttons.forEach(btn => btn.disabled = true);
 
     const feedbackBox = document.getElementById("exam-feedback-box");
@@ -1611,21 +1641,18 @@ function selectExamOption(selectedIndex, btnElement) {
     const fbText = document.getElementById("exam-feedback-text");
     const fbRong = document.getElementById("exam-rong-treasure");
 
-    feedbackBox.className = "exam-feedback-box"; // 重置 CSS 樣式
-
+    feedbackBox.className = "exam-feedback-box";
     const pointsPerQuestion = 100 / examState.questions.length;
 
     if (selectedIndex === correctIdx) {
-        // 答對邏輯
         btnElement.classList.add("correct");
         feedbackBox.classList.add("correct-box");
         fbTitle.innerText = "🎉 答對了！";
-        fbText.innerHTML = qData.explanation ? qData.explanation.replace(/\n/g, "<br>") : "你對此核心概念的掌握相當精準！請繼續保持！";
+        fbText.innerHTML = qData.explanation.replace(/\n/g, "<br>");
         examState.score += pointsPerQuestion;
     } else {
-        // 答錯邏輯
         btnElement.classList.add("wrong");
-        if (buttons[correctIdx]) buttons[correctIdx].classList.add("correct"); // 高亮顯示正確答案
+        if (buttons[correctIdx]) buttons[correctIdx].classList.add("correct");
         feedbackBox.classList.add("wrong-box");
         fbTitle.innerText = "❌ 答錯了！";
 
@@ -1633,19 +1660,15 @@ function selectExamOption(selectedIndex, btnElement) {
         examState.wrongQuestions.push(qData);
 
         const letter = String.fromCharCode(65 + correctIdx);
-        const formattedExplanation = qData.explanation ? qData.explanation.replace(/\n/g, "<br>") : "請核對該題目的基本觀念，注意題目陷阱與借貸方向。";
-        fbText.innerHTML = `正確答案為：【${letter}】 ${qData.options[correctIdx]}。<br><br>解析：${formattedExplanation}`;
+        fbText.innerHTML = `正確答案為：【${letter}】 ${qData.options[correctIdx]}。<br><br>解析：${qData.explanation.replace(/\n/g, "<br>")}`;
 
-        // 自動匹配黃蓉老師的盲點大補帖卡片
         const bsKey = getBlindspotKey(qData.question);
         if (bsKey && BLINDSPOTS[bsKey]) {
             const bs = BLINDSPOTS[bsKey];
             fbText.innerHTML += `
                 <div class="blindspot-cheatsheet-card" style="margin-top:16px;">
                     <div class="blindspot-header">
-                        <div class="blindspot-header-left">
-                            <span class="blindspot-title">${bs.title}</span>
-                        </div>
+                        <span class="blindspot-title">${bs.title}</span>
                         <span class="blindspot-tag">${bs.tag}</span>
                     </div>
                     <div class="blindspot-content">${bs.content}</div>
@@ -1654,13 +1677,9 @@ function selectExamOption(selectedIndex, btnElement) {
         }
     }
 
-    // 填入黃蓉老師的大秘寶解題提示（若題庫無提供則顯示黃金口訣兜底）
-    fbRong.innerText = qData.rongTreasure || "黃蓉老師叮嚀：做題時先看清交貨條件與平時記帳法！借貸一定要平衡，虛帳戶期末一定要結平！";
-
-    // 展開解析面板
+    fbRong.innerText = qData.rongTreasure;
     feedbackBox.classList.remove("hidden");
 
-    // 判定是否為最後一題，動態修改按鈕文字
     const nextBtn = document.getElementById("btn-next-exam-question");
     if (examState.currentIndex === examState.questions.length - 1) {
         nextBtn.innerText = "查看總結成果 📊";
@@ -1685,20 +1704,13 @@ function showExamSummary() {
 
     const finalScore = Math.min(Math.round(examState.score), 100);
     document.getElementById("exam-results-score").innerText = finalScore;
-
-    // 儲存並更新此年份的最高得分紀錄
-    examState.completedYears[examState.currentYear] = finalScore;
+    examState.completedYears[examState.currentWeek || examState.currentYear] = finalScore;
 
     const descEl = document.getElementById("exam-results-desc");
-    if (finalScore === 100) {
-        descEl.innerText = "🏆 簡直完美！你已經完全掌握了此年份的統測精華考點！";
-    } else if (finalScore >= 60) {
-        descEl.innerText = "👍 表現不錯！答對了大部分題目，再複習一下錯題就可以更上一層樓！";
-    } else {
-        descEl.innerText = "💪 沒關係！錯題是最好的老師。多研讀黃蓉老師的解題大秘寶，再挑戰一次吧！";
-    }
+    if (finalScore === 100) descEl.innerText = "🏆 簡直完美！你已經完全掌握了此年份的統測精華考點！";
+    else if (finalScore >= 60) descEl.innerText = "👍 表現不錯！答對了大部分題目，再複習一下錯題就可以更上一層樓！";
+    else descEl.innerText = "💪 錯題是最好的老師。多研讀黃蓉老師的解題大秘寶，再挑戰一次吧！";
 
-    // 統計本次錯題對應的關鍵盲點
     let blindspotsHtml = "";
     if (examState.wrongQuestions && examState.wrongQuestions.length > 0) {
         const uniqueKeys = new Set();
@@ -1706,23 +1718,16 @@ function showExamSummary() {
             const key = getBlindspotKey(q.question);
             if (key) uniqueKeys.add(key);
         });
-
         if (uniqueKeys.size > 0) {
             blindspotsHtml = `
                 <div class="blindspot-compilation" style="text-align: left; margin-top: 24px;">
-                    <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--color-secondary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">🎯 錯題對應：黃蓉老師的「統測關鍵盲點大補帖」</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">依據你答錯的題型，老師為你整理了以下核心盲點，請仔細複習再挑戰喔！</p>
+                    <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--color-secondary); margin-bottom: 12px;">🎯 錯題對應：黃蓉老師的「統測關鍵盲點大補帖」</h3>
             `;
             uniqueKeys.forEach(key => {
                 const bs = BLINDSPOTS[key];
                 blindspotsHtml += `
                     <div class="blindspot-cheatsheet-card">
-                        <div class="blindspot-header">
-                            <div class="blindspot-header-left">
-                                <span class="blindspot-title">${bs.title}</span>
-                            </div>
-                            <span class="blindspot-tag">${bs.tag}</span>
-                        </div>
+                        <div class="blindspot-header"><span class="blindspot-title">${bs.title}</span><span class="blindspot-tag">${bs.tag}</span></div>
                         <div class="blindspot-content">${bs.content}</div>
                     </div>
                 `;
@@ -1731,21 +1736,15 @@ function showExamSummary() {
         }
     }
 
-    // 將盲點特訓卡片動態塞入結算畫面中
     let container = document.getElementById("exam-results-blindspots-container");
     if (!container) {
         container = document.createElement("div");
         container.id = "exam-results-blindspots-container";
-        const actions = resultsCard.querySelector(".results-actions");
-        resultsCard.insertBefore(container, actions);
+        resultsCard.insertBefore(container, resultsCard.querySelector(".results-actions"));
     }
     container.innerHTML = blindspotsHtml;
 
-    // 重考按鈕點擊重新加載當前年份
-    const retryBtn = document.getElementById("btn-retry-exam");
-    retryBtn.onclick = () => loadPastExam(examState.currentYear);
-
-    // 同步增加總體學習經驗值 (XP)
+    document.getElementById("btn-retry-exam").onclick = () => loadPastExam(examState.currentYear);
     userProgress.score += finalScore;
     updateHeaderProgress();
 }
