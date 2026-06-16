@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>統測會計學 | 6個月零基礎快速上手互動平台</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <!-- Vanilla CSS -->
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h2>統測會計通</h2>
+                    <span>6個月極速上手</span>
+                </div>
+            </div>
+            
+            <!-- User Status Card -->
+            <div class="user-card">
+                <div class="user-avatar">🏆</div>
+                <div class="user-info">
+                    <span class="user-name">會計新手</span>
+                    <span class="user-level">LV.1 借貸初心者</span>
+                </div>
+                <div class="user-streak" title="連續學習天數">
+                    <span>🔥 <strong id="streak-count">3</strong> 天</span>
+                </div>
+            </div>
+
+            <!-- Nav Items -->
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-tab="dashboard">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    學習儀表板
+                </button>
+                <button class="nav-btn" data-tab="map">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><path d="M16.2 7.8l-2 5.6-5.6 2 2-5.6 5.6-2z"></path></svg>
+                    24週地圖
+                </button>
+                <button class="nav-btn" data-tab="sandbox">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    借貸天平沙盒
+                </button>
+                <button class="nav-btn" data-tab="quiz">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    過關挑戰
+                </button>
+                <button class="nav-btn" data-tab="cheat-sheet">
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                    會計科目秘笈
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>© 2026 統測會計通</p>
+                <p>專為高職/四技二專統測設計</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="header-left">
+                    <h1 id="page-title">學習儀表板</h1>
+                    <p id="page-subtitle" class="text-secondary">歡迎回來！今天也是進步的一天。</p>
+                </div>
+                <div class="header-right">
+                    <div class="progress-pill">
+                        <span>總進度</span>
+                        <div class="progress-bar-sm">
+                            <div class="progress-fill-sm" style="width: 13%;"></div>
+                        </div>
+                        <span class="progress-text">13%</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Tab Contents -->
+            <div class="tab-wrapper">
+                
+                <!-- 1. Dashboard Tab -->
+                <section id="tab-dashboard" class="tab-content active">
+                    <div class="dashboard-grid">
+                        
+                        <!-- Welcome & Quick Tip -->
+                        <div class="card card-hero">
+                            <div class="card-hero-content">
+                                <span class="badge badge-primary">考頻重點</span>
+                                <h2>會計循環核心觀念</h2>
+                                <p>「借貸法則」是會計之魂。記住口訣：資產、費損在借方增加；負債、權益、收益在貸方增加。左借右貸，永遠平衡！</p>
+                                <button class="btn btn-primary btn-icon" onclick="switchTab('sandbox')">
+                                    <span>前往天平沙盒練習</span>
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                </button>
+                            </div>
+                            <div class="card-hero-deco">⚖️</div>
+                        </div>
+
+                        <!-- Mini Stats -->
+                        <div class="stats-row">
+                            <div class="card stat-card">
+                                <div class="stat-icon pink">⏳</div>
+                                <div class="stat-data">
+                                    <h3>6個月</h3>
+                                    <span>客製化衝刺目標</span>
+                                </div>
+                            </div>
+                            <div class="card stat-card">
+                                <div class="stat-icon purple">🎯</div>
+                                <div class="stat-data">
+                                    <h3>已過 3 關</h3>
+                                    <span>共 24 個學習主題</span>
+                                </div>
+                            </div>
+                            <div class="card stat-card">
+                                <div class="stat-icon green">⚡</div>
+                                <div class="stat-data">
+                                    <h3>100%</h3>
+                                    <span>前置單元答題率</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6-Month Timeline Preview -->
+                        <div class="card card-timeline-preview">
+                            <div class="card-header">
+                                <h3>半年學習路線精華</h3>
+                                <button class="btn btn-text" onclick="switchTab('map')">查看完整地圖 →</button>
+                            </div>
+                            <div class="timeline-summary-list">
+                                <div class="timeline-sum-item completed">
+                                    <div class="timeline-sum-badge">M1</div>
+                                    <div class="timeline-sum-info">
+                                        <h4>會計基本概念與會計要素</h4>
+                                        <p>第 1 - 4 週 • 打好觀念地基，理解會計方程式與借貸法則</p>
+                                    </div>
+                                    <span class="status-tag success">已完成</span>
+                                </div>
+                                <div class="timeline-sum-item active">
+                                    <div class="timeline-sum-badge">M2</div>
+                                    <div class="timeline-sum-info">
+                                        <h4>會計循環前期：分錄與過帳</h4>
+                                        <p>第 5 - 8 週 • 日記簿分錄編製，過入分類帳與T字帳</p>
+                                    </div>
+                                    <span class="status-tag warning">進行中</span>
+                                </div>
+                                <div class="timeline-sum-item locked">
+                                    <div class="timeline-sum-badge">M3</div>
+                                    <div class="timeline-sum-info">
+                                        <h4>會計循環後期：調整與結帳</h4>
+                                        <p>第 9 - 12 週 • 權益應計預計調整、虛實帳戶結轉</p>
+                                    </div>
+                                    <span class="status-tag text-secondary">未解鎖</span>
+                                </div>
+                                <div class="timeline-sum-item locked">
+                                    <div class="timeline-sum-badge">M4-M6</div>
+                                    <div class="timeline-sum-info">
+                                        <h4>營業稅、資產評價與模擬考</h4>
+                                        <p>第 13 - 24 週 • 現金/存貨會計實務與統測總複習</p>
+                                    </div>
+                                    <span class="status-tag text-secondary">未解鎖</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Practice Card -->
+                        <div class="card card-quick-practice">
+                            <h3>每日焦點挑戰</h3>
+                            <p class="practice-text">「企業向銀行借款 $50,000 以支付貨款，這筆交易對會計方程式的影響為何？」</p>
+                            <div class="practice-options">
+                                <button class="btn btn-outline-primary" onclick="checkQuickAnswer(false, this)">資產增加，權益增加</button>
+                                <button class="btn btn-outline-primary" onclick="checkQuickAnswer(true, this)">資產增加，負債增加</button>
+                                <button class="btn btn-outline-primary" onclick="checkQuickAnswer(false, this)">資產減少，負債減少</button>
+                            </div>
+                            <div id="quick-feedback" class="feedback-msg"></div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- 2. 24-Week Map Tab -->
+                <section id="tab-map" class="tab-content">
+                    <div class="map-controls">
+                        <div class="phase-selector">
+                            <button class="btn btn-sm active" data-phase="1">Month 1-2 (基石)</button>
+                            <button class="btn btn-sm" data-phase="2">Month 3-4 (核心)</button>
+                            <button class="btn btn-sm" data-phase="3">Month 5-6 (衝刺)</button>
+                        </div>
+                        <div class="map-legend">
+                            <span><span class="dot done"></span>已完成</span>
+                            <span><span class="dot active"></span>進行中</span>
+                            <span><span class="dot locked"></span>未解鎖</span>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Map Container -->
+                    <div class="map-container">
+                        <!-- Custom Dynamic Map Nodes (Generated by JavaScript) -->
+                        <div id="map-nodes-container" class="map-nodes-container"><div class="map-node-wrapper done"><div class="map-node-dot">1</div><div class="card map-node-card done">
+            <span class="badge badge-purple">M1 W1</span>
+            <h4>會計之源與會計要素</h4>
+            <p>會計的意義與基本假設，認識財務報表的五大要素：資產、負債、權益、收益、費損。...</p>
+        </div></div><div class="map-node-wrapper done"><div class="map-node-dot">2</div><div class="card map-node-card done">
+            <span class="badge badge-purple">M1 W2</span>
+            <h4>會計方程式與恆等式</h4>
+            <p>深入學習會計恆等式（資產 = 負債 + 權益），並探討各種交易類型對方程式的增減影響。...</p>
+        </div></div><div class="map-node-wrapper done"><div class="map-node-dot">3</div><div class="card map-node-card done">
+            <span class="badge badge-purple">M1 W3</span>
+            <h4>借貸法則黃金密碼</h4>
+            <p>會計學的十字路口！學習「左借右貸」法則，掌握各要素增減記帳的方向，奠定記帳實作的靈魂。...</p>
+        </div></div><div class="map-node-wrapper active"><div class="map-node-dot">4</div><div class="card map-node-card active">
+            <span class="badge badge-purple">M1 W4</span>
+            <h4>會計科目分類與編號</h4>
+            <p>認識會計科目的四位數編號系統，熟悉統測常考的基礎科目（如現金、應收帳款、應付帳款等）。...</p>
+        </div></div><div class="map-node-wrapper locked"><div class="map-node-dot">5</div><div class="card map-node-card locked">
+            <span class="badge badge-purple">M2 W5</span>
+            <h4>分錄日記簿實務</h4>
+            <p>會計循環的第一步！學習如何將商業交易轉化為會計分錄，並登錄於日記簿中。...</p>
+        </div></div><div class="map-node-wrapper locked"><div class="map-node-dot">6</div><div class="card map-node-card locked">
+            <span class="badge badge-purple">M2 W6</span>
+            <h4>過帳與分類帳處理</h4>
+            <p>學習如何將日記簿中的分錄過入分類帳（特別是T字帳），以統計各科目的個別餘額。...</p>
+        </div></div><div class="map-node-wrapper locked"><div class="map-node-dot">7</div><div class="card map-node-card locked">
+            <span class="badge badge-purple">M2 W7</span>
+            <h4>試算與試算表編製</h4>
+            <p>檢驗記帳是否出錯的關鍵步驟！學習如何編製「總額試算表」與「餘額試算表」，並分析無法發現的錯誤類型。...</p>
+        </div></div><div class="map-node-wrapper locked"><div class="map-node-dot">8</div><div class="card map-node-card locked">
+            <span class="badge badge-purple">M2 W8</span>
+            <h4>商業會計法與帳簿通則</h4>
+            <p>配合台灣法規，學習《商業會計法》中關於會計憑證、會計帳簿以及記帳通則的法律規範。...</p>
+        </div></div></div>
+                    </div>
+
+                    <!-- Map Details Sidebar (Slide out on click) -->
+                    <div id="map-drawer" class="map-drawer">
+                        <div class="drawer-header">
+                            <h3 id="drawer-title">第 5 週：分錄日記簿</h3>
+                            <button class="btn-close" onclick="closeDrawer()">×</button>
+                        </div>
+                        <div class="drawer-body">
+                            <div class="drawer-meta">
+                                <span class="badge badge-purple" id="drawer-difficulty">難度: 🟢 易</span>
+                                <span class="badge badge-cyan" id="drawer-exam-weight">考頻: ⭐⭐⭐⭐</span>
+                            </div>
+                            <p id="drawer-desc" class="drawer-desc">學習如何將交易紀錄在日記簿中，包含借貸科目判定與金額計算。這是所有分錄的基礎。</p>
+                            
+                            <div class="drawer-objectives">
+                                <h5>🎯 本週學習重點：</h5>
+                                <ul id="drawer-obj-list">
+                                    <li>理解原始交易憑證與記帳憑證</li>
+                                    <li>掌握日記簿格式與分錄三要素</li>
+                                    <li>學會買賣業的進銷貨基本分錄</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="drawer-action">
+                                <button class="btn btn-primary btn-block" id="drawer-start-btn">開啟微課程與測驗</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. Balance Sandbox Tab -->
+                <section id="tab-sandbox" class="tab-content">
+                    <div class="sandbox-layout">
+                        
+                        <!-- Left Control Panel: Transactions & Journal Entries -->
+                        <div class="sandbox-controls card">
+                            <h3>交易分錄實作區</h3>
+                            <p class="instruction-text">請選擇一筆交易，並完成借貸分錄。點擊「送出並過帳」，看看天平的平衡變化！</p>
+                            
+                            <!-- Transaction Selector -->
+                            <div class="transaction-selector-wrapper">
+                                <label for="tx-select">選擇模擬交易：</label>
+                                <select id="tx-select" class="form-control"><option value="tx-1">1. 業主出資創立店鋪</option><option value="tx-2">2. 現金購入辦公設備</option><option value="tx-3">3. 向供應商賒購商品</option><option value="tx-4">4. 現金支付辦公室租金</option><option value="tx-5">5. 向銀行借入短期款項</option></select>
+                            </div>
+
+                            <div class="tx-description card-nested">
+                                <h4 id="sandbox-tx-title">1. 業主出資創立店鋪</h4>
+                                <p id="sandbox-tx-desc">業主（老闆）投入現金 $100,000 開設「統測會計通商店」。</p>
+                            </div>
+
+                            <!-- Journal Entry Form -->
+                            <div class="journal-entry-form">
+                                <h4>記帳分錄 (Journal Entry)</h4>
+                                
+                                <!-- Debit Row -->
+                                <div class="entry-row debit-row">
+                                    <span class="row-label debit">借 (Dr.)</span>
+                                    <select class="form-control account-select" id="debit-account"><option value="">選擇會計科目...</option><option value="現金">1101 現金 (資產)</option><option value="應收票據">1113 應收票據 (資產)</option><option value="應收帳款">1114 應收帳款 (資產)</option><option value="存貨">1130 存貨 (資產)</option><option value="預付費用">1140 預付費用 (資產)</option><option value="辦公設備">1401 辦公設備 (資產)</option><option value="應付票據">2102 應付票據 (負債)</option><option value="應付帳款">2103 應付帳款 (負債)</option><option value="銀行借款">2120 銀行借款 (負債)</option><option value="預收收入">2140 預收收入 (負債)</option><option value="業主資本">3101 業主資本 (權益)</option><option value="業主往來">3102 業主往來 (權益)</option><option value="銷貨收入">4101 銷貨收入 (收益)</option><option value="利息收入">4601 利息收入 (收益)</option><option value="銷貨成本">5101 銷貨成本 (費損)</option><option value="租金費用">6101 租金費用 (費損)</option><option value="水電費">6102 水電費 (費損)</option><option value="薪資費用">6103 薪資費用 (費損)</option><option value="折舊">6104 折舊 (費損)</option></select>
+                                    <input type="number" class="form-control amount-input" id="debit-amount" placeholder="金額" min="1">
+                                </div>
+                                
+                                <!-- Credit Row -->
+                                <div class="entry-row credit-row">
+                                    <span class="row-label credit">貸 (Cr.)</span>
+                                    <select class="form-control account-select" id="credit-account"><option value="">選擇會計科目...</option><option value="現金">1101 現金 (資產)</option><option value="應收票據">1113 應收票據 (資產)</option><option value="應收帳款">1114 應收帳款 (資產)</option><option value="存貨">1130 存貨 (資產)</option><option value="預付費用">1140 預付費用 (資產)</option><option value="辦公設備">1401 辦公設備 (資產)</option><option value="應付票據">2102 應付票據 (負債)</option><option value="應付帳款">2103 應付帳款 (負債)</option><option value="銀行借款">2120 銀行借款 (負債)</option><option value="預收收入">2140 預收收入 (負債)</option><option value="業主資本">3101 業主資本 (權益)</option><option value="業主往來">3102 業主往來 (權益)</option><option value="銷貨收入">4101 銷貨收入 (收益)</option><option value="利息收入">4601 利息收入 (收益)</option><option value="銷貨成本">5101 銷貨成本 (費損)</option><option value="租金費用">6101 租金費用 (費損)</option><option value="水電費">6102 水電費 (費損)</option><option value="薪資費用">6103 薪資費用 (費損)</option><option value="折舊">6104 折舊 (費損)</option></select>
+                                    <input type="number" class="form-control amount-input" id="credit-amount" placeholder="金額" min="1">
+                                </div>
+
+                                <div class="sandbox-actions">
+                                    <button class="btn btn-outline-secondary" onclick="resetSandbox()">清除重填</button>
+                                    <button class="btn btn-primary" id="btn-post-entry">送出並過帳 ⚡</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Sandbox Alert Message -->
+                            <div id="sandbox-message" class="sandbox-message hidden">
+                                <h4>🎉 借貸平衡且正確！</h4>
+                                <p>過帳完成，資金已成功流入對應科目！</p>
+                            </div>
+                        </div>
+
+                        <!-- Right Interactive Visuals: Balance Scale & T-Accounts -->
+                        <div class="sandbox-visuals">
+                            
+                            <!-- 1. Dynamic Accounting Equation Scale -->
+                            <div class="scale-section card">
+                                <div class="scale-header">
+                                    <h3>會計方程式動態天平</h3>
+                                    <div class="equation-display">
+                                        <span class="eq-term asset">資產 (Assets)</span>
+                                        <span class="eq-operator">=</span>
+                                        <span class="eq-term liability">負債 (Liabilities)</span>
+                                        <span class="eq-operator">+</span>
+                                        <span class="eq-term equity">權益 (Equity)</span>
+                                    </div>
+                                </div>
+
+                                <!-- The Physical Scale SVG/CSS animation -->
+                                <div class="scale-container">
+                                    <div id="accounting-scale" class="scale-device">
+                                        <!-- Pivot Base -->
+                                        <div class="scale-base"></div>
+                                        <!-- Central Beam -->
+                                        <div class="scale-beam" id="scale-beam" style="transform: rotate(0deg);">
+                                            <!-- Left Hanger -->
+                                            <div class="scale-hanger hanger-left">
+                                                <div class="scale-pan pan-left" id="pan-left">
+                                                    <span class="pan-title">借方 (Dr.)<br><strong>資產總額</strong></span>
+                                                    <span class="pan-value" id="val-assets">$0</span>
+                                                </div>
+                                            </div>
+                                            <!-- Right Hanger -->
+                                            <div class="scale-hanger hanger-right">
+                                                <div class="scale-pan pan-right" id="pan-right">
+                                                    <span class="pan-title">貸方 (Cr.)<br><strong>負債 + 權益</strong></span>
+                                                    <span class="pan-value" id="val-liab-equity">$0</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="scale-status-bar text-center">
+                                    <span class="status-indicator" id="scale-status" style="color: var(--color-success);">⚖️ 目前方程式平衡 (資產 = 負債 + 權益)</span>
+                                </div>
+                            </div>
+
+                            <!-- 2. Dynamic T-Accounts -->
+                            <div class="t-accounts-section card">
+                                <h3>過帳分類帳 (T-Accounts)</h3>
+                                <div class="t-accounts-grid" id="t-accounts-grid"><p class="text-secondary" style="grid-column: span 3; text-align:center; padding:32px;">尚無過帳資料。請於左側送出借貸分錄！</p></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. Quiz Tab -->
+                <section id="tab-quiz" class="tab-content">
+                    <div class="quiz-container card">
+                        <div class="quiz-header">
+                            <span class="quiz-progress-label">問題 <span id="current-question-num">1</span> / <span id="total-questions-num">5</span></span>
+                            <div class="quiz-score-pill">🔥 分數: <span id="quiz-score">0</span></div>
+                        </div>
+
+                        <!-- Quiz Body -->
+                        <div class="quiz-card-wrapper">
+                            <div class="quiz-question-card" id="quiz-question-card">
+                                <h3 id="quiz-question-text">載入中...</h3>
+                                <div class="quiz-options-list" id="quiz-options-list">
+                                    <!-- Options populated by JS -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quiz Navigation / Feedback -->
+                        <div class="quiz-footer">
+                            <div id="quiz-feedback-box" class="quiz-feedback-box hidden">
+                                <h4 id="quiz-feedback-title">正確！</h4>
+                                <p id="quiz-feedback-text">詳細說明內容...</p>
+                                <button class="btn btn-primary" id="btn-next-question">下一題 →</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. Cheat Sheet Tab -->
+                <section id="tab-cheat-sheet" class="tab-content">
+                    <div class="cheatsheet-container">
+                        
+                        <!-- Search & Filter -->
+                        <div class="cheatsheet-header card">
+                            <h3>統測會計學必背科目秘笈</h3>
+                            <p>依據最新會計準則，整理統測必考的五大類會計科目及其借貸方向。</p>
+                            <div class="search-box">
+                                <input type="text" id="subject-search" class="form-control" placeholder="輸入會計科目名稱、代碼或借貸方向進行搜尋...">
+                            </div>
+                        </div>
+
+                        <!-- 5 Category Cards Grid -->
+                        <div class="cheatsheet-grid">
+                            
+                            <!-- 1. Assets -->
+                            <div class="card category-card border-assets">
+                                <div class="category-header bg-assets">
+                                    <h4>資產類 (Assets)</h4>
+                                    <span class="direction-badge">借方 (Dr.) 增加</span>
+                                </div>
+                                <div class="subject-list" id="list-assets"><div class="subject-item highlight" title="手存現金、銀行存款、零用金等可隨時支用的資金。">
+                <span>現金</span>
+                <span class="code">1101</span>
+            </div><div class="subject-item " title="因賒銷商品或提供勞務而取得之未到期商業匯票或本票。">
+                <span>應收票據</span>
+                <span class="code">1113</span>
+            </div><div class="subject-item highlight" title="因賒銷商品或提供勞務而對顧客擁有的債權。">
+                <span>應收帳款</span>
+                <span class="code">1114</span>
+            </div><div class="subject-item highlight" title="企業準備用於日常銷售的商品、產成品或在製品。">
+                <span>存貨</span>
+                <span class="code">1130</span>
+            </div><div class="subject-item " title="已支付但應歸屬於未來期間的費用（如預付租金、預付保險費）。">
+                <span>預付費用</span>
+                <span class="code">1140</span>
+            </div><div class="subject-item highlight" title="辦公用之電腦、桌椅、保險箱等耐用年限在一年以上之資產。">
+                <span>辦公設備</span>
+                <span class="code">1401</span>
+            </div></div>
+                            </div>
+
+                            <!-- 2. Liabilities -->
+                            <div class="card category-card border-liabilities">
+                                <div class="category-header bg-liabilities">
+                                    <h4>負債類 (Liabilities)</h4>
+                                    <span class="direction-badge">貸方 (Cr.) 增加</span>
+                                </div>
+                                <div class="subject-list" id="list-liabilities"><div class="subject-item " title="因賒購商品或接受勞務而開出承兌之未到期本票或匯票。">
+                <span>應付票據</span>
+                <span class="code">2102</span>
+            </div><div class="subject-item highlight" title="因賒購商品或接受勞務而暫欠供應商的貨款。">
+                <span>應付帳款</span>
+                <span class="code">2103</span>
+            </div><div class="subject-item highlight" title="向金融機構借入的款項（可分為短期借款或長期借款）。">
+                <span>銀行借款</span>
+                <span class="code">2120</span>
+            </div><div class="subject-item " title="已收取但尚未提供商品或勞務的預收貨款，代表履行合約之義務。">
+                <span>預收收入</span>
+                <span class="code">2140</span>
+            </div></div>
+                            </div>
+
+                            <!-- 3. Equity -->
+                            <div class="card category-card border-equity">
+                                <div class="category-header bg-equity">
+                                    <h4>權益類 (Equity)</h4>
+                                    <span class="direction-badge">貸方 (Cr.) 增加</span>
+                                </div>
+                                <div class="subject-list" id="list-equity"><div class="subject-item highlight" title="業主（老闆）投入企業的原始資本或增資總額。">
+                <span>業主資本</span>
+                <span class="code">3101</span>
+            </div><div class="subject-item " title="記錄業主與企業間的臨時資金往來或提支資金的往來科目。">
+                <span>業主往來</span>
+                <span class="code">3102</span>
+            </div></div>
+                            </div>
+
+                            <!-- 4. Revenue -->
+                            <div class="card category-card border-revenue">
+                                <div class="category-header bg-revenue">
+                                    <h4>收益類 (Revenue)</h4>
+                                    <span class="direction-badge">貸方 (Cr.) 增加</span>
+                                </div>
+                                <div class="subject-list" id="list-revenue"><div class="subject-item highlight" title="銷售商品或提供勞務所得的營業收入總額。">
+                <span>銷貨收入</span>
+                <span class="code">4101</span>
+            </div><div class="subject-item " title="因存放銀行或持有債券所賺取的利息收益。">
+                <span>利息收入</span>
+                <span class="code">4601</span>
+            </div></div>
+                            </div>
+
+                            <!-- 5. Expense -->
+                            <div class="card category-card border-expense">
+                                <div class="category-header bg-expense">
+                                    <h4>費損類 (Expenses)</h4>
+                                    <span class="direction-badge">借方 (Dr.) 增加</span>
+                                </div>
+                                <div class="subject-list" id="list-expense"><div class="subject-item highlight" title="已銷售商品的購進成本，為營業收入之直接對應成本。">
+                <span>銷貨成本</span>
+                <span class="code">5101</span>
+            </div><div class="subject-item highlight" title="承租辦公室、店面或倉庫所支付的租金負擔。">
+                <span>租金費用</span>
+                <span class="code">6101</span>
+            </div><div class="subject-item " title="營業場所耗用之水費、電費及瓦斯費支出。">
+                <span>水電費</span>
+                <span class="code">6102</span>
+            </div><div class="subject-item highlight" title="支付給員工及管理人員的薪資、津貼與獎金。">
+                <span>薪資費用</span>
+                <span class="code">6103</span>
+            </div><div class="subject-item " title="固定資產（如辦公設備、運輸設備）隨時間消耗轉化為費用的部分。">
+                <span>折舊</span>
+                <span class="code">6104</span>
+            </div></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Micro-Lesson Modal (Pop up when starting a lesson from map) -->
+    <div id="lesson-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="lesson-title">會計要素與恆等式</h3>
+                <button class="btn-close" onclick="closeLessonModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <!-- Slides Container -->
+                <div class="slides-container" id="slides-container">
+                    <!-- Dynamic slides populated by JS -->
+                </div>
+                
+                <!-- Slide Navigation Controls -->
+                <div class="slides-nav">
+                    <button class="btn btn-outline-secondary" id="btn-prev-slide">◀ 上一頁</button>
+                    <div class="slide-dots" id="slide-dots">
+                        <!-- Dynamic dots -->
+                    </div>
+                    <button class="btn btn-primary" id="btn-next-slide">下一頁 ▶</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vanilla Javascript -->
+    <script src="app.js?v=3"></script>
+
+
+</body></html>
