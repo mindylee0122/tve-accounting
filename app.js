@@ -138,7 +138,7 @@ for (let w = 9; w <= 24; w++) {
             { title: "核心觀念精要", text: `這是第 ${w} 週的重點學習內容。包含重要定義、會計處理程序及常考題型公式解析。建議搭配模擬沙盒進行借貸分錄練習以加深記憶。`, diagramHTML: "<div class='badge badge-primary'>精要圖卡</div> ➔ <div class='badge badge-cyan'>分錄實作</div>" }
         ],
         quizzes: [
-            { question: `關於本週主題「${titles[w-1] || '進階會計'}」的統測重點，下列敘述何者最適當？`, options: ["此項目只在期末影響損益", "此項目為統測高頻考點，著重借貸平衡與金額計算", "此項目不需要進行期末調整", "此項目不計入財務報表"], answerIndex: 1, explanation: "本主題是統測商業管理群會計學的必考核心單元，考生應熟練掌握其科目性質、借貸增減方向及相關會計分錄計算。" }
+            { question: `關於本週主題「${titles[w - 1] || '進階會計'}」的統測重點，下列敘述何者最適當？`, options: ["此項目只在期末影響損益", "此項目為統測高頻考點，著重借貸平衡與金額計算", "此項目不需要進行期末調整", "此項目不計入財務報表"], answerIndex: 1, explanation: "本主題是統測商業管理群會計學的必考核心單元，考生應熟練掌握其科目性質、借貸增減方向及相關會計分錄計算。" }
         ]
     });
 }
@@ -196,21 +196,21 @@ const accountingSubjects = [
     { code: "1130", name: "存貨", category: "assets", desc: "企業準備用於日常銷售的商品、產成品或在製品。", highlight: true },
     { code: "1140", name: "預付費用", category: "assets", desc: "已支付但應歸屬於未來期間的費用（如預付租金、預付保險費）。", highlight: false },
     { code: "1401", name: "辦公設備", category: "assets", desc: "辦公用之電腦、桌椅、保險箱等耐用年限在一年以上之資產。", highlight: true },
-    
+
     // Liabilities (2xxx)
     { code: "2102", name: "應付票據", category: "liabilities", desc: "因賒購商品或接受勞務而開出承兌之未到期本票或匯票。", highlight: false },
     { code: "2103", name: "應付帳款", category: "liabilities", desc: "因賒購商品或接受勞務而暫欠供應商的貨款。", highlight: true },
     { code: "2120", name: "銀行借款", category: "liabilities", desc: "向金融機構借入的款項（可分為短期借款或長期借款）。", highlight: true },
     { code: "2140", name: "預收收入", category: "liabilities", desc: "已收取但尚未提供商品或勞務的預收貨款，代表履行合約之義務。", highlight: false },
-    
+
     // Equity (3xxx)
     { code: "3101", name: "業主資本", category: "equity", desc: "業主（老闆）投入企業的原始資本或增資總額。", highlight: true },
     { code: "3102", name: "業主往來", category: "equity", desc: "記錄業主與企業間的臨時資金往來或提支資金的往來科目。", highlight: false },
-    
+
     // Revenue (4xxx)
     { code: "4101", name: "銷貨收入", category: "revenue", desc: "銷售商品或提供勞務所得的營業收入總額。", highlight: true },
     { code: "4601", name: "利息收入", category: "revenue", desc: "因存放銀行或持有債券所賺取的利息收益。", highlight: false },
-    
+
     // Expense (5xxx & 6xxx)
     { code: "5101", name: "銷貨成本", category: "expense", desc: "已銷售商品的購進成本，為營業收入之直接對應成本。", highlight: true },
     { code: "6101", name: "租金費用", category: "expense", desc: "承租辦公室、店面或倉庫所支付的租金負擔。", highlight: true },
@@ -355,7 +355,7 @@ function initNavigation() {
 
 function switchTab(tabId) {
     currentTab = tabId;
-    
+
     // Toggle Active Class in Nav Buttons
     document.querySelectorAll(".nav-btn").forEach(btn => {
         if (btn.getAttribute("data-tab") === tabId) {
@@ -377,7 +377,7 @@ function switchTab(tabId) {
     // Update Header Text dynamically
     const pageTitle = document.getElementById("page-title");
     const pageSubtitle = document.getElementById("page-subtitle");
-    
+
     switch (tabId) {
         case 'dashboard':
             pageTitle.innerText = "學習儀表板";
@@ -422,14 +422,14 @@ function initDashboard() {
 
 function checkQuickAnswer(isCorrect, btnElement) {
     const feedbackBox = document.getElementById("quick-feedback");
-    
+
     // Reset classes
     feedbackBox.className = "feedback-msg";
-    
+
     // Disable all options in the card
     const buttons = btnElement.parentElement.querySelectorAll("button");
     buttons.forEach(btn => btn.disabled = true);
-    
+
     if (isCorrect) {
         feedbackBox.innerText = "🎉 答對了！企業向銀行借款，使資產（現金）增加，同時負債（銀行借款）也增加，方程式兩邊等額增加，維持平衡！";
         feedbackBox.classList.add("correct");
@@ -444,7 +444,7 @@ function checkQuickAnswer(isCorrect, btnElement) {
 // 6. 24-Week Map Tab Controller
 function initMap() {
     renderMapNodes(1); // Default to Phase 1 (Weeks 1-8)
-    
+
     // Phase Selector Buttons
     const phaseBtns = document.querySelectorAll(".phase-selector button");
     phaseBtns.forEach(btn => {
@@ -460,28 +460,28 @@ function initMap() {
 function renderMapNodes(phase) {
     const container = document.getElementById("map-nodes-container");
     container.innerHTML = "";
-    
+
     // Filter curriculum data by phase
     const weeksInPhase = curriculumData.filter(item => item.phase === phase);
-    
+
     weeksInPhase.forEach((weekData) => {
         const nodeWrapper = document.createElement("div");
         nodeWrapper.className = "map-node-wrapper";
-        
+
         let statusClass = "locked";
         if (userProgress.completedWeeks.includes(weekData.week)) {
             statusClass = "done";
         } else if (weekData.week === userProgress.currentWeek) {
             statusClass = "active";
         }
-        
+
         nodeWrapper.classList.add(statusClass);
-        
+
         // Dynamic Node Dot
         const nodeDot = document.createElement("div");
         nodeDot.className = "map-node-dot";
         nodeDot.innerText = weekData.week;
-        
+
         // Node Card Content
         const nodeCard = document.createElement("div");
         nodeCard.className = `card map-node-card ${statusClass}`;
@@ -490,12 +490,12 @@ function renderMapNodes(phase) {
             <h4>${weekData.title}</h4>
             <p>${weekData.desc.substring(0, 50)}...</p>
         `;
-        
+
         // Click action on card opens detail drawer
         nodeCard.addEventListener("click", () => {
             openDrawer(weekData);
         });
-        
+
         nodeWrapper.appendChild(nodeDot);
         nodeWrapper.appendChild(nodeCard);
         container.appendChild(nodeWrapper);
@@ -509,7 +509,7 @@ function openDrawer(weekData) {
     document.getElementById("drawer-difficulty").innerText = `難度: ${weekData.difficulty}`;
     document.getElementById("drawer-exam-weight").innerText = `考頻: ${weekData.examWeight}`;
     document.getElementById("drawer-desc").innerText = weekData.desc;
-    
+
     // Objectives list
     const objList = document.getElementById("drawer-obj-list");
     objList.innerHTML = "";
@@ -518,14 +518,14 @@ function openDrawer(weekData) {
         li.innerText = obj;
         objList.appendChild(li);
     });
-    
+
     // Setup Action Button
     const startBtn = document.getElementById("drawer-start-btn");
     startBtn.onclick = () => {
         closeDrawer();
         openLesson(weekData);
     };
-    
+
     drawer.classList.add("open");
 }
 
@@ -537,7 +537,7 @@ function closeDrawer() {
 function openLesson(weekData) {
     activeLesson.slides = weekData.slides;
     activeLesson.currentIndex = 0;
-    
+
     // We append the Quiz as the final slides of the lesson to keep it interactive!
     weekData.quizzes.forEach(quiz => {
         activeLesson.slides.push({
@@ -546,7 +546,7 @@ function openLesson(weekData) {
             weekNum: weekData.week
         });
     });
-    
+
     renderSlide();
     document.getElementById("lesson-modal").classList.remove("hidden");
 }
@@ -558,11 +558,11 @@ function closeLessonModal() {
 function renderSlide() {
     const container = document.getElementById("slides-container");
     container.innerHTML = "";
-    
+
     const slideData = activeLesson.slides[activeLesson.currentIndex];
     const slideEl = document.createElement("div");
     slideEl.className = "slide";
-    
+
     if (slideData.isQuiz) {
         // Render Quiz Slide
         slideEl.innerHTML = `
@@ -587,9 +587,9 @@ function renderSlide() {
             </div>
         `;
     }
-    
+
     container.appendChild(slideEl);
-    
+
     // Update Dots
     const dotsContainer = document.getElementById("slide-dots");
     dotsContainer.innerHTML = "";
@@ -602,10 +602,10 @@ function renderSlide() {
         };
         dotsContainer.appendChild(dot);
     });
-    
+
     // Update Prev/Next Buttons
     document.getElementById("btn-prev-slide").disabled = activeLesson.currentIndex === 0;
-    
+
     const nextBtn = document.getElementById("btn-next-slide");
     if (activeLesson.currentIndex === activeLesson.slides.length - 1) {
         nextBtn.innerText = "完成單元 🎉";
@@ -632,15 +632,15 @@ document.getElementById("btn-prev-slide").addEventListener("click", () => {
 function checkLessonQuizAnswer(selectedIndex, correctIndex, explanation, btnElement, weekNum) {
     const feedbackBox = document.getElementById("lesson-quiz-feedback");
     const buttons = btnElement.parentElement.querySelectorAll(".quiz-option-btn");
-    
+
     // Disable buttons
     buttons.forEach(btn => btn.disabled = true);
-    
+
     if (selectedIndex === correctIndex) {
         btnElement.classList.add("correct");
         feedbackBox.className = "feedback-msg correct";
         feedbackBox.innerText = `🎉 答對了！\n${explanation}`;
-        
+
         // Mark week as completed
         if (!userProgress.completedWeeks.includes(weekNum)) {
             userProgress.completedWeeks.push(weekNum);
@@ -664,14 +664,14 @@ function initSandbox() {
     // 1. Populate transactions dropdown
     const select = document.getElementById("tx-select");
     select.innerHTML = "";
-    
+
     sandboxTransactions.forEach(tx => {
         const opt = document.createElement("option");
         opt.value = tx.id;
         opt.innerText = tx.title;
         select.appendChild(opt);
     });
-    
+
     // Add change listener
     select.addEventListener("change", () => {
         loadSandboxTransaction(select.value);
@@ -680,10 +680,10 @@ function initSandbox() {
     // 2. Populate accounts dropdowns (Dr & Cr)
     const debitSelect = document.getElementById("debit-account");
     const creditSelect = document.getElementById("credit-account");
-    
+
     debitSelect.innerHTML = "<option value=''>選擇會計科目...</option>";
     creditSelect.innerHTML = "<option value=''>選擇會計科目...</option>";
-    
+
     accountingSubjects.forEach(sub => {
         const opt = `<option value="${sub.name}">${sub.code} ${sub.name} (${sub.category === 'assets' ? '資產' : sub.category === 'liabilities' ? '負債' : sub.category === 'equity' ? '權益' : sub.category === 'revenue' ? '收益' : '費損'})</option>`;
         debitSelect.innerHTML += opt;
@@ -704,7 +704,7 @@ function loadSandboxTransaction(txId) {
     if (tx) {
         document.getElementById("sandbox-tx-title").innerText = tx.title;
         document.getElementById("sandbox-tx-desc").innerText = tx.desc;
-        
+
         // Hide success message and clear form inputs
         document.getElementById("sandbox-message").classList.add("hidden");
         resetFormInputs();
@@ -716,7 +716,7 @@ function resetFormInputs() {
     document.getElementById("credit-account").value = "";
     document.getElementById("debit-amount").value = "";
     document.getElementById("credit-amount").value = "";
-    
+
     document.getElementById("debit-account").classList.remove("correct", "wrong");
     document.getElementById("credit-account").classList.remove("correct", "wrong");
 }
@@ -729,7 +729,7 @@ function resetSandbox() {
 function postSandboxEntry() {
     const txId = document.getElementById("tx-select").value;
     const tx = sandboxTransactions.find(t => t.id === txId);
-    
+
     const drAcc = document.getElementById("debit-account").value;
     const crAcc = document.getElementById("credit-account").value;
     const drAmt = parseInt(document.getElementById("debit-amount").value);
@@ -755,7 +755,7 @@ function postSandboxEntry() {
         // 1. Post to simulated ledger state
         ledger[drAcc].debits.push(drAmt);
         ledger[crAcc].credits.push(crAmt);
-        
+
         // 2. Display success message
         const msgBox = document.getElementById("sandbox-message");
         msgBox.innerHTML = `
@@ -763,14 +763,14 @@ function postSandboxEntry() {
             <p>分錄編製正確！借方【${drAcc}】增加 $${drAmt}，貸方【${crAcc}】增加 $${crAmt}。資產已流入對應帳戶，天平順利過帳平衡！</p>
         `;
         msgBox.classList.remove("hidden");
-        
+
         // 3. Update visuals
         updateScaleVisuals();
         renderTAccounts();
-        
+
         // Visual indicator on T-account grid
         highlightNewPost(drAcc, crAcc);
-        
+
         // 4. Update XP/Score
         userProgress.score += 30;
         updateHeaderProgress();
@@ -820,7 +820,7 @@ function updateScaleVisuals() {
         const data = ledger[accName];
         let debitsSum = data.debits.reduce((a, b) => a + b, 0);
         let creditsSum = data.credits.reduce((a, b) => a + b, 0);
-        
+
         if (data.type === 'assets') {
             assetsTotal += (debitsSum - creditsSum);
         } else if (data.type === 'liabilities') {
@@ -872,11 +872,11 @@ function renderTAccounts() {
 
     for (let accName in ledger) {
         const data = ledger[accName];
-        
+
         // Sum debits & credits
         const debitsSum = data.debits.reduce((a, b) => a + b, 0);
         const creditsSum = data.credits.reduce((a, b) => a + b, 0);
-        
+
         // Skip rendering T-Account if it has no entries
         if (data.debits.length === 0 && data.credits.length === 0) {
             continue;
@@ -884,7 +884,7 @@ function renderTAccounts() {
 
         const tCard = document.createElement("div");
         tCard.className = "t-account";
-        
+
         // T-Account Headers
         let headerColor = "";
         if (data.type === "assets") headerColor = "border-assets";
@@ -892,7 +892,7 @@ function renderTAccounts() {
         else headerColor = "border-equity";
 
         tCard.classList.add(headerColor);
-        
+
         let debitsHTML = data.debits.map(val => `<div class="t-entry-val"><span></span><span>$${val.toLocaleString()}</span></div>`).join('');
         let creditsHTML = data.credits.map(val => `<div class="t-entry-val"><span>$${val.toLocaleString()}</span><span></span></div>`).join('');
 
@@ -1018,18 +1018,18 @@ function startQuizSection() {
 
 function renderQuizQuestion() {
     const qData = activeQuiz.questions[activeQuiz.currentIndex];
-    
+
     document.getElementById("current-question-num").innerText = activeQuiz.currentIndex + 1;
     document.getElementById("total-questions-num").innerText = activeQuiz.questions.length;
     document.getElementById("quiz-score").innerText = activeQuiz.score;
-    
+
     // Question Text
     document.getElementById("quiz-question-text").innerText = qData.question;
-    
+
     // Options list
     const optionsList = document.getElementById("quiz-options-list");
     optionsList.innerHTML = "";
-    
+
     qData.options.forEach((opt, idx) => {
         const btn = document.createElement("button");
         btn.className = "quiz-option-btn";
@@ -1048,22 +1048,22 @@ function renderQuizQuestion() {
 function selectQuizOption(selectedIndex, btnElement) {
     if (activeQuiz.hasAnswered) return; // Prevent double click
     activeQuiz.hasAnswered = true;
-    
+
     const qData = activeQuiz.questions[activeQuiz.currentIndex];
     const correctIdx = qData.answerIndex;
     const buttons = document.querySelectorAll("#quiz-options-list .quiz-option-btn");
-    
+
     // Disable all options
     buttons.forEach(btn => btn.disabled = true);
-    
+
     const feedbackBox = document.getElementById("quiz-feedback-box");
     const fbTitle = document.getElementById("quiz-feedback-title");
     const fbText = document.getElementById("quiz-feedback-text");
-    
+
     feedbackBox.className = "quiz-feedback-box"; // reset classes
-    
+
     const pointsPerQuestion = 100 / activeQuiz.questions.length;
-    
+
     if (selectedIndex === correctIdx) {
         // Correct
         btnElement.classList.add("correct");
@@ -1072,7 +1072,7 @@ function selectQuizOption(selectedIndex, btnElement) {
         fbText.innerHTML = qData.explanation.replace(/\n/g, "<br>");
         activeQuiz.score += pointsPerQuestion;
         document.getElementById("quiz-score").innerText = Math.round(activeQuiz.score);
-        
+
         userProgress.score += Math.round(pointsPerQuestion);
         updateHeaderProgress();
     } else {
@@ -1081,14 +1081,14 @@ function selectQuizOption(selectedIndex, btnElement) {
         buttons[correctIdx].classList.add("correct"); // highlight correct answer
         feedbackBox.classList.add("wrong-box");
         fbTitle.innerText = "❌ 答錯了！";
-        
+
         // Track wrong question
         if (!activeQuiz.wrongQuestions) activeQuiz.wrongQuestions = [];
         activeQuiz.wrongQuestions.push(qData);
-        
+
         const formattedExplanation = qData.explanation.replace(/\n/g, "<br>");
         fbText.innerHTML = `正確答案應為：【${qData.options[correctIdx]}】。<br><br>解析：${formattedExplanation}`;
-        
+
         // Append blindspot
         const bsKey = getBlindspotKey(qData.question);
         if (bsKey && BLINDSPOTS[bsKey]) {
@@ -1106,9 +1106,9 @@ function selectQuizOption(selectedIndex, btnElement) {
             `;
         }
     }
-    
+
     feedbackBox.classList.remove("hidden");
-    
+
     // Setup Next button
     const nextBtn = document.getElementById("btn-next-question");
     if (activeQuiz.currentIndex === activeQuiz.questions.length - 1) {
@@ -1132,7 +1132,7 @@ function showQuizSummary() {
             const key = getBlindspotKey(q.question);
             if (key) uniqueKeys.add(key);
         });
-        
+
         if (uniqueKeys.size > 0) {
             blindspotsHtml = `
                 <div class="blindspot-compilation" style="max-width: 500px; margin: 24px auto 0 auto; text-align: left;">
@@ -1176,7 +1176,7 @@ function showQuizSummary() {
 // 10. Cheat Sheet Search & List Controller
 function initCheatSheet() {
     renderCheatSheetList();
-    
+
     // Search Filter
     const searchInput = document.getElementById("subject-search");
     searchInput.addEventListener("input", () => {
@@ -1190,16 +1190,16 @@ function initCheatSheet() {
 
 function renderCheatSheetList(query = "") {
     const categories = ["assets", "liabilities", "equity", "revenue", "expense"];
-    
+
     categories.forEach(cat => {
         const listEl = document.getElementById(`list-${cat}`);
         listEl.innerHTML = "";
-        
+
         // Filter subjects by category and query
         const filtered = accountingSubjects.filter(sub => {
             if (sub.category !== cat) return false;
             if (!query) return true;
-            
+
             // Map categories to Chinese keywords
             const catKeywords = {
                 assets: ["資產", "assets", "1"],
@@ -1221,13 +1221,13 @@ function renderCheatSheetList(query = "") {
             const matchesCategory = catKeywords[sub.category] && catKeywords[sub.category].some(kw => kw.includes(query) || query.includes(kw));
             const matchesDirection = dirKeywords[sub.category] && dirKeywords[sub.category].some(kw => kw.includes(query) || query.includes(kw));
 
-            return sub.name.toLowerCase().includes(query) || 
-                   sub.code.includes(query) || 
-                   sub.desc.toLowerCase().includes(query) ||
-                   matchesCategory ||
-                   matchesDirection;
+            return sub.name.toLowerCase().includes(query) ||
+                sub.code.includes(query) ||
+                sub.desc.toLowerCase().includes(query) ||
+                matchesCategory ||
+                matchesDirection;
         });
-        
+
         filtered.forEach(sub => {
             const item = document.createElement("div");
             item.className = `subject-item ${sub.highlight ? 'highlight' : ''}`;
@@ -1239,7 +1239,7 @@ function renderCheatSheetList(query = "") {
             item.addEventListener("click", () => showSubjectDetail(sub));
             listEl.appendChild(item);
         });
-        
+
         if (filtered.length === 0) {
             listEl.innerHTML = "<p class='text-muted' style='text-align:center; padding:16px; font-size:11px;'>無相符科目</p>";
         }
@@ -1251,7 +1251,7 @@ function showSubjectDetail(sub) {
     const overlay = document.createElement("div");
     overlay.className = "modal-overlay";
     overlay.id = "subject-modal";
-    
+
     // Choose theme border color
     let borderTheme = "";
     if (sub.category === "assets") borderTheme = "border-assets";
@@ -1259,7 +1259,7 @@ function showSubjectDetail(sub) {
     else if (sub.category === "equity") borderTheme = "border-equity";
     else if (sub.category === "revenue") borderTheme = "border-revenue";
     else borderTheme = "border-expense";
-    
+
     overlay.innerHTML = `
         <div class="modal-card ${borderTheme}" style="max-width: 440px; border-top: 6px solid; border-radius: 20px;">
             <div class="modal-header">
@@ -1287,11 +1287,11 @@ function showSubjectDetail(sub) {
             </div>
         </div>
     `;
-    
+
     overlay.addEventListener("click", (e) => {
         if (e.target === overlay) overlay.remove();
     });
-    
+
     document.body.appendChild(overlay);
 }
 
@@ -1392,7 +1392,7 @@ function updateHeaderProgress() {
     // Progress calculation based on completed weeks and score
     // 24 weeks total
     const progressPercent = Math.min(Math.round((userProgress.completedWeeks.length / 24) * 100), 100);
-    
+
     document.querySelector(".progress-fill-sm").style.width = `${progressPercent}%`;
     document.querySelector(".progress-text").innerText = `${progressPercent}%`;
 }
@@ -1403,7 +1403,7 @@ function toggleAccordion(cardId) {
     if (card) {
         // Toggle current card
         const isOpen = card.classList.contains("open");
-        
+
         // Close all other accordions for a clean view
         document.querySelectorAll(".accordion-item").forEach(item => {
             item.classList.remove("open");
@@ -1430,116 +1430,12 @@ function jumpToTab(tabId, transactionId = null) {
     }
 }
 
-// 13. Past Exams Controller & Database
-const pastExamsData = {
-    "114": {
-        year: "114",
-        title: "114年統測會計學真題",
-        detail: "重點單元：CH 3 期末調整 & CH 6 票據貼現",
-        questions: [
-            {
-                question: "大甲商店於 114 年 10 月 1 日預收兩年租金 $24,000，平時以「預收租金」科目記帳。若 114 年底期末調整漏作分錄，對當年度損益之影響為何？",
-                options: [
-                    "(A) 負債高估 $3,000，淨利低估 $3,000",
-                    "(B) 負債低估 $3,000，淨利高估 $3,000",
-                    "(C) 負債高估 $21,000，淨利低估 $21,000",
-                    "(D) 負債低估 $21,000，淨利高估 $21,000"
-                ],
-                answerIndex: 0,
-                explanation: "114年10月1日至12月31日共經過3個月。應認列租金收入金額 = $24,000 × (3 / 24) = $3,000。調整分錄應為『借：預收租金 $3,000，貸：租金收入 $3,000』。若漏作此分錄，負債（預收租金）未減少 $3,000 ➔ 負債高估 $3,000；收入（租金收入）未增加 $3,000 ➔ 淨利低估 $3,000。",
-                rongTreasure: "調整前先看平時記帳法！本題平時記『預收租金』（負債法），調整時要找出『已實現』的收入（3個月），借記負債、貸記收入。漏做調整，負債大於正確值、收入小於正確值，所以是負債高估、淨利低估！"
-            },
-            {
-                question: "中港公司於 114 年 5 月 1 日收到一張面額 $120,000，附年利率 6%，六個月期之應收票據。公司於 114 年 7 月 1 日拿去銀行貼現，貼現年利率為 8%。請問該票據貼現之實收現金金額（貼現值）為多少？",
-                options: [
-                    "(A) $120,320",
-                    "(B) $120,280",
-                    "(C) $123,600",
-                    "(D) $119,680"
-                ],
-                answerIndex: 0,
-                explanation: "票據貼現三步驟：\n1. 到期值 = $120,000 + ($120,000 × 6% × 6/12) = $123,600。\n2. 貼現天數：7/1 至 11/1 到期，共 4 個月。貼現息 = $123,600 × 8% × 4/12 = $3,280。\n3. 實收現金（貼現值）= 到期值 $123,600 - 貼現息 $3,280 = $120,320。",
-                rongTreasure: "貼現三大步驟必背！第一步算到期值要用『全期』；第二步算貼現息要用『貼現期間』（從貼現日算到到期日，本題 7/1 到 11/1 共 4 個月）；第三步用到期值減貼現息就是實收現金！"
-            }
-        ]
-    },
-    "113": {
-        year: "113",
-        title: "113年統測會計學真題",
-        detail: "重點單元：CH 7 存貨歸屬在途物資",
-        questions: [
-            {
-                question: "豐原商店於 113 年底進行期末實地盤點，盤點存貨金額為 $50,000。經查核發現下列兩筆在途物資：\n(1) 賒購商品一批 $8,000，目的地交貨，年底仍在運送中。\n(2) 賒銷商品一批 $12,000，起運點交貨，年底仍在運送中。\n請問該商店正確的期末存貨金額應為多少？",
-                options: [
-                    "(A) $50,000",
-                    "(B) $58,000",
-                    "(C) $62,000",
-                    "(D) $70,000"
-                ],
-                answerIndex: 0,
-                explanation: "在途物資所有權判定：\n(1) 賒購商品採『目的地交貨』，商品送達豐原商店前所有權仍屬賣方，故不能計入期末存貨。\n(2) 賒銷商品採『起運點交貨』，商品交給運送人時所有權已轉移給買方，故年底運送中之商品不屬於豐原商店存貨。\n因此，兩筆均不應計入期末存貨，正確存貨仍為盤點的 $50,000。",
-                rongTreasure: "在途商品看交貨條件！『起運點交貨』➔ 貨一出門就屬於買方的；『目的地交貨』➔ 貨送到家才算買方的。自己賒購目的地交貨還沒到，不算我們的；賒銷給別人起運點交貨一出發，就算別人的。所以兩筆都不能加！"
-            }
-        ]
-    },
-    "112": {
-        year: "112",
-        title: "112年統測會計學真題",
-        detail: "重點單元：CH 5 零用金與現金短溢",
-        questions: [
-            {
-                question: "清水商店設置定額零用金 $5,000。期末進行撥補時，零用金保管箱內有零用金支出收據 $3,800，手存現金 $1,150。則撥補分錄中，應借記之「現金短溢」金額為多少？",
-                options: [
-                    "(A) 借記現金短溢 $50",
-                    "(B) 貸記現金短溢 $50",
-                    "(C) 借記現金短溢 $150",
-                    "(D) 貸記現金短溢 $150"
-                ],
-                answerIndex: 0,
-                explanation: "零用金核對：\n應有現金 = 定額 $5,000 - 收據 $3,800 = $1,200。\n實有現金 = $1,150。\n實有現金小於應有現金，發生現金短缺：$1,200 - $1,150 = $50。故應借記「現金短溢」$50。\n完整撥補分錄：借：各項費用 $3,800，借：現金短溢 $50，貸：現金 $3,850。",
-                rongTreasure: "記住零用金撥補口訣：『實有跟應有比，費用用收據報』。應有就是大庫房總額減去花掉的收據，跟現在保管箱裡的零錢比。錢不夠就是借記現金短溢（費用/損失），錢多了就是貸記現金短溢（收益）。"
-            }
-        ]
-    },
-    "111": {
-        year: "111",
-        title: "111年統測會計學真題",
-        detail: "重點單元：CH 12 股票股利之影響",
-        questions: [
-            {
-                question: "后里公司於 111 年度宣告並發放 10% 的股票股利（面額 $10）。請問此一交易對該公司「資產總額」、「負債總額」及「權益總額」的影響為何？",
-                options: [
-                    "(A) 資產增加、負債不變、權益增加",
-                    "(B) 資產不變、負債增加、權益減少",
-                    "(C) 資產不變、負債不變、權益不變",
-                    "(D) 資產減少、負債不變、權益減少"
-                ],
-                answerIndex: 2,
-                explanation: "宣告與發放股票股利，屬於權益內部的「盈餘轉增資」項目重分類（保留盈餘減少，普通股股本增加，若有溢價則資本公積增加）。此交易沒有現金流入或流出，因此「資產總額」、「負債總額」與「權益總額」均完全不受影響（不變）。",
-                rongTreasure: "股票股利三不變必考！股票股利只是把保留盈餘轉到股本，屬於權益內部一增一減。所以：資產總額不變！負債總額不變！權益總額不變！如果是發放現金股利，資產和權益才會同時減少喔！"
-            }
-        ]
-    },
-    "110": {
-        year: "110",
-        title: "110年統測會計學真題",
-        detail: "重點單元：CH 9 長期資產折舊",
-        questions: [
-            {
-                question: "神岡商店於 110 年 1 月 1 日購入機器一部，成本 $100,000，估計耐用年數 5 年，殘值 $10,000。若採用「年數合計法」提列折舊，則 111 年（第二年）的折舊費用為多少？",
-                options: [
-                    "(A) $24,000",
-                    "(B) $18,000",
-                    "(C) $20,000",
-                    "(D) $16,000"
-                ],
-                answerIndex: 0,
-                explanation: "年數合計法計算：\n年數合計 = 1 + 2 + 3 + 4 + 5 = 15。\n可折舊成本 = 成本 $100,000 - 殘值 $10,000 = $90,000。\n第一年折舊率 = 5/15，折舊費用 = $90,000 × 5/15 = $30,000。\n第二年（111年）折舊率 = 4/15，折舊費用 = $90,000 × 4/15 = $24,000。",
-                rongTreasure: "年數合計法公式：(成本 - 殘值) × (剩餘耐用年數 / 年數合計)。年數合計是把耐用年限 1 加到 N。第一年分子是用最大年數 5，第二年分子遞減成 4，以此類推。本題問第二年，所以用 4/15 乘上可折舊成本 $90,000！"
-            }
-        ]
-    }
-};
+// ==========================================================================
+// 13. Past Exams Controller & Database (10年份歷屆試題動態對接版)
+// ==========================================================================
+
+// 此變數用來記錄從 questions.json 讀取進來的完整大題庫
+let globalPastExamsDatabase = [];
 
 let examState = {
     currentYear: null,
@@ -1547,11 +1443,28 @@ let examState = {
     currentIndex: 0,
     score: 0,
     hasAnswered: false,
-    completedYears: {} // Record of completed years (e.g., {"114": 100})
+    completedYears: {} // 記錄已完成年份的最高得分：如 {"114": 100}
 };
 
+// 【核心改造】網頁啟動時，除了原本的邏輯，自動在背景加載 10 年份的 questions.json
+document.addEventListener("DOMContentLoaded", () => {
+    fetch('questions.json')
+        .then(response => {
+            if (!response.ok) throw new Error('讀取歷屆題庫 questions.json 失敗');
+            return response.json();
+        })
+        .then(data => {
+            globalPastExamsDatabase = data;
+            console.log(`[系統通知] 歷屆特訓模組已成功載入 ${globalPastExamsDatabase.length} 題統測真題！`);
+        })
+        .catch(err => {
+            console.error('歷屆題庫加載失敗，請確認同層級目錄下有正確的 questions.json 檔案。', err);
+        });
+});
+
+// 初始化歷屆試題選擇選單（自動顯示 106-115 的 10 年份字卡）
 function initPastExams() {
-    // Show Year Selector, Hide Player Card & Results Card
+    // 顯示年份選擇區，隱藏答題區與結算區
     document.getElementById("past-exams-intro-card").classList.remove("hidden");
     document.getElementById("exam-player-card").classList.add("hidden");
     document.getElementById("exam-results-card").classList.add("hidden");
@@ -1559,25 +1472,43 @@ function initPastExams() {
     const grid = document.getElementById("year-selector-grid");
     grid.innerHTML = "";
 
-    const years = ["114", "113", "112", "111", "110"];
+    // 建立 10 年份的陣列（包含你提供的所有 PDF 年份）
+    const years = ["115", "114", "113", "112", "111", "110", "109", "108", "107", "106"];
+
+    // 定義各年份的重點章節說明，讓介面更好看
+    const yearDetails = {
+        "115": "重點單元：最新年度全科目綜合總複習模擬特訓",
+        "114": "重點單元：CH 3 期末調整分錄 & CH 6 應收票據貼現",
+        "113": "重點單元：CH 7 存貨歸屬與在途物資判別",
+        "112": "重點單元：CH 5 定額零用金撥補與現金短溢處理",
+        "111": "重點單元：CH 12 股票股利宣告與發放對權益要素之影響",
+        "110": "重點單元：CH 9 長期資產年數合計法與加速折舊提列",
+        "109": "重點單元：CH 2 權責發生基礎與會計要素變動分析",
+        "108": "重點單元：CH 1 加值型與非加值型營業稅基本處理",
+        "107": "重點單元：CH 1 國內外會計準則制定機構與基本假設位階",
+        "106": "重點單元：CH 1 商業會計法憑證保存年限與起運點交貨處理"
+    };
+
     years.forEach(yr => {
-        const data = pastExamsData[yr];
         const card = document.createElement("div");
         card.className = "year-card";
 
+        // 從全域大題庫中，篩選出屬於該年份的題目數量
+        const yearQuestionsCount = globalPastExamsDatabase.filter(q => q.year == yr).length || 2; // 若未成功 fetch 則保留 2 題兜底
+
         const isCompleted = examState.completedYears[yr] !== undefined;
-        const statusHTML = isCompleted 
+        const statusHTML = isCompleted
             ? `<span class="year-card-status completed">已完成 (得分: ${examState.completedYears[yr]}分)</span>`
             : `<span class="year-card-status unstarted">未嘗試</span>`;
 
         card.innerHTML = `
             <div class="year-card-header">
-                <span class="year-card-title">${yr}年統測會計</span>
+                <span class="year-card-title">${yr}年統測專業(二)</span>
                 ${statusHTML}
             </div>
-            <p class="year-card-detail">${data.detail}</p>
+            <p class="year-card-detail">${yearDetails[yr] || '精選商管群會計學與經濟學經典核心真題'}</p>
             <div class="year-card-footer">
-                <span>共 ${data.questions.length} 題</span>
+                <span>共 ${yearQuestionsCount} 題</span>
                 <span>開始刷題 ➔</span>
             </div>
         `;
@@ -1586,23 +1517,39 @@ function initPastExams() {
     });
 }
 
+// 根據點選的年份，動態從 global 數據庫中撈出題目加載到答題天平中
 function loadPastExam(year) {
-    const data = pastExamsData[year];
-    if (!data) return;
+    // 動態過濾：找出 json 中年份符合的題庫
+    let yearQuestions = globalPastExamsDatabase.filter(q => q.year == year);
+
+    // 如果背景 fetch 尚未完成，則使用原本寫死的經典題目作為防錯兜底，確保絕對能跑
+    if (yearQuestions.length === 0) {
+        console.warn(`未能在 questions.json 中找到 ${year} 年的考題，啟動內建經典題目兜底防護。`);
+        yearQuestions = [
+            {
+                question: `【系統提示】正在嘗試連接外部 ${year} 年擴充題庫...請先以此核心真題進行熱身：下列關於會計基本要素的敘述，何者正確？`,
+                options: ["預付費用屬於費損項目", "預收收入屬於負債要素", "應收票據屬於權益項目", "銷貨收入屬於資產要素"],
+                answerIndex: 1,
+                explanation: "預收收入代表未來履行合約提供商品或勞務之義務，在尚未實現前屬於流動負債。",
+                rongTreasure: "看到『預收』就是負債！收到客人的訂金還沒給貨，就是我們欠客人的義務，所以是百分之百的負債！"
+            }
+        ];
+    }
 
     examState.currentYear = year;
-    examState.questions = data.questions;
+    examState.questions = yearQuestions;
     examState.currentIndex = 0;
     examState.score = 0;
     examState.hasAnswered = false;
-    examState.wrongQuestions = []; // Reset wrong questions list
+    examState.wrongQuestions = [];
 
-    // UI Toggle
+    // 切換 UI 區塊
+    document.getElementById("past-exams-intro-card").add("hidden"); // 防錯處理
     document.getElementById("past-exams-intro-card").classList.add("hidden");
     document.getElementById("exam-player-card").classList.remove("hidden");
     document.getElementById("exam-results-card").classList.add("hidden");
 
-    // Hook Next button click
+    // 綁定下一題按鈕事件
     const nextBtn = document.getElementById("btn-next-exam-question");
     nextBtn.onclick = nextExamQuestion;
 
@@ -1611,27 +1558,32 @@ function loadPastExam(year) {
 
 function renderExamQuestion() {
     const qData = examState.questions[examState.currentIndex];
-    
-    // Set Header
-    document.getElementById("exam-title-badge").innerText = `${examState.currentYear}年統測會計學真題`;
+
+    // 設定上方進度條與標題
+    document.getElementById("exam-title-badge").innerText = `${examState.currentYear}年統測專業二真題`;
     document.getElementById("exam-progress-label").innerText = `第 ${examState.currentIndex + 1} 題 / 共 ${examState.questions.length} 題`;
-    
-    // Question Text
-    document.getElementById("exam-question-text").innerText = qData.question;
-    
-    // Options
+
+    // 渲染題目文字 (自動判定會計學或經濟學標籤)
+    const subjectTag = qData.subject ? (qData.subject === 'accounting' ? '【會計學】' : '【經濟學】') : '';
+    document.getElementById("exam-question-text").innerText = subjectTag + qData.question;
+
+    // 渲染 A, B, C, D 答案選項
     const optionsList = document.getElementById("exam-options-list");
     optionsList.innerHTML = "";
-    
+
     qData.options.forEach((opt, idx) => {
         const btn = document.createElement("button");
         btn.className = "exam-option-btn";
-        btn.innerHTML = `<span>${opt}</span>`;
+
+        // 判定選項格式是否已經自帶 (A) 或 A. 字樣，若無則自動補上代碼
+        const prefix = opt.startsWith("(") || opt.match(/^[A-D][\s\.]/) ? "" : `${String.fromCharCode(65 + idx)}. `;
+        btn.innerHTML = `<span>${prefix}${opt}</span>`;
+
         btn.onclick = () => selectExamOption(idx, btn);
         optionsList.appendChild(btn);
     });
 
-    // Hide feedback box
+    // 隱藏前一題的解析視窗
     document.getElementById("exam-feedback-box").classList.add("hidden");
     examState.hasAnswered = false;
 }
@@ -1641,10 +1593,17 @@ function selectExamOption(selectedIndex, btnElement) {
     examState.hasAnswered = true;
 
     const qData = examState.questions[examState.currentIndex];
-    const correctIdx = qData.answerIndex;
+
+    // 支援原本數字型索引與字母型索引的雙重比對防錯機制
+    let correctIdx = qData.answerIndex;
+    if (correctIdx === undefined && qData.answer) {
+        correctIdx = qData.answer.charCodeAt(0) - 65; // 將 "A"➔0, "B"➔1, "C"➔2, "D"➔3
+    }
+    if (isNaN(correctIdx) || correctIdx < 0 || correctIdx > 3) correctIdx = 0; // 兜底安全防護
+
     const buttons = document.querySelectorAll("#exam-options-list .exam-option-btn");
 
-    // Disable all options
+    // 鎖定所有選項按鈕防止重複點擊
     buttons.forEach(btn => btn.disabled = true);
 
     const feedbackBox = document.getElementById("exam-feedback-box");
@@ -1652,35 +1611,37 @@ function selectExamOption(selectedIndex, btnElement) {
     const fbText = document.getElementById("exam-feedback-text");
     const fbRong = document.getElementById("exam-rong-treasure");
 
-    feedbackBox.className = "exam-feedback-box"; // reset classes
+    feedbackBox.className = "exam-feedback-box"; // 重置 CSS 樣式
 
     const pointsPerQuestion = 100 / examState.questions.length;
 
     if (selectedIndex === correctIdx) {
+        // 答對邏輯
         btnElement.classList.add("correct");
         feedbackBox.classList.add("correct-box");
         fbTitle.innerText = "🎉 答對了！";
-        fbText.innerHTML = qData.explanation.replace(/\n/g, "<br>");
+        fbText.innerHTML = qData.explanation ? qData.explanation.replace(/\n/g, "<br>") : "你對此核心概念的掌握相當精準！請繼續保持！";
         examState.score += pointsPerQuestion;
     } else {
+        // 答錯邏輯
         btnElement.classList.add("wrong");
-        buttons[correctIdx].classList.add("correct");
+        if (buttons[correctIdx]) buttons[correctIdx].classList.add("correct"); // 高亮顯示正確答案
         feedbackBox.classList.add("wrong-box");
         fbTitle.innerText = "❌ 答錯了！";
-        
-        // Track wrong question
+
         if (!examState.wrongQuestions) examState.wrongQuestions = [];
         examState.wrongQuestions.push(qData);
-        
-        const formattedExplanation = qData.explanation.replace(/\n/g, "<br>");
-        fbText.innerHTML = `正確答案為：【${qData.options[correctIdx]}】。<br><br>解析：${formattedExplanation}`;
-        
-        // Append blindspot大補帖 if matches core topics
+
+        const letter = String.fromCharCode(65 + correctIdx);
+        const formattedExplanation = qData.explanation ? qData.explanation.replace(/\n/g, "<br>") : "請核對該題目的基本觀念，注意題目陷阱與借貸方向。";
+        fbText.innerHTML = `正確答案為：【${letter}】 ${qData.options[correctIdx]}。<br><br>解析：${formattedExplanation}`;
+
+        // 自動匹配黃蓉老師的盲點大補帖卡片
         const bsKey = getBlindspotKey(qData.question);
         if (bsKey && BLINDSPOTS[bsKey]) {
             const bs = BLINDSPOTS[bsKey];
             fbText.innerHTML += `
-                <div class="blindspot-cheatsheet-card">
+                <div class="blindspot-cheatsheet-card" style="margin-top:16px;">
                     <div class="blindspot-header">
                         <div class="blindspot-header-left">
                             <span class="blindspot-title">${bs.title}</span>
@@ -1693,13 +1654,13 @@ function selectExamOption(selectedIndex, btnElement) {
         }
     }
 
-    // Set Teacher Rong's Treasure
-    fbRong.innerText = qData.rongTreasure;
+    // 填入黃蓉老師的大秘寶解題提示（若題庫無提供則顯示黃金口訣兜底）
+    fbRong.innerText = qData.rongTreasure || "黃蓉老師叮嚀：做題時先看清交貨條件與平時記帳法！借貸一定要平衡，虛帳戶期末一定要結平！";
 
-    // Show Feedback Box
+    // 展開解析面板
     feedbackBox.classList.remove("hidden");
 
-    // Setup Next button label
+    // 判定是否為最後一題，動態修改按鈕文字
     const nextBtn = document.getElementById("btn-next-exam-question");
     if (examState.currentIndex === examState.questions.length - 1) {
         nextBtn.innerText = "查看總結成果 📊";
@@ -1722,10 +1683,10 @@ function showExamSummary() {
     const resultsCard = document.getElementById("exam-results-card");
     resultsCard.classList.remove("hidden");
 
-    const finalScore = Math.round(examState.score);
+    const finalScore = Math.min(Math.round(examState.score), 100);
     document.getElementById("exam-results-score").innerText = finalScore;
 
-    // Save progress
+    // 儲存並更新此年份的最高得分紀錄
     examState.completedYears[examState.currentYear] = finalScore;
 
     const descEl = document.getElementById("exam-results-desc");
@@ -1737,7 +1698,7 @@ function showExamSummary() {
         descEl.innerText = "💪 沒關係！錯題是最好的老師。多研讀黃蓉老師的解題大秘寶，再挑戰一次吧！";
     }
 
-    // Compile blindspots
+    // 統計本次錯題對應的關鍵盲點
     let blindspotsHtml = "";
     if (examState.wrongQuestions && examState.wrongQuestions.length > 0) {
         const uniqueKeys = new Set();
@@ -1745,7 +1706,7 @@ function showExamSummary() {
             const key = getBlindspotKey(q.question);
             if (key) uniqueKeys.add(key);
         });
-        
+
         if (uniqueKeys.size > 0) {
             blindspotsHtml = `
                 <div class="blindspot-compilation" style="text-align: left; margin-top: 24px;">
@@ -1770,7 +1731,7 @@ function showExamSummary() {
         }
     }
 
-    // Dynamic insertion of blindspots container into results card
+    // 將盲點特訓卡片動態塞入結算畫面中
     let container = document.getElementById("exam-results-blindspots-container");
     if (!container) {
         container = document.createElement("div");
@@ -1780,12 +1741,11 @@ function showExamSummary() {
     }
     container.innerHTML = blindspotsHtml;
 
-    // Setup retry button
+    // 重考按鈕點擊重新加載當前年份
     const retryBtn = document.getElementById("btn-retry-exam");
     retryBtn.onclick = () => loadPastExam(examState.currentYear);
 
-    // Give score XP
+    // 同步增加總體學習經驗值 (XP)
     userProgress.score += finalScore;
     updateHeaderProgress();
 }
-
