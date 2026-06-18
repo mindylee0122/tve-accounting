@@ -700,11 +700,11 @@ function initPastExams() {
 
     const years = ["115", "114", "113", "112", "111", "110", "109", "108", "107", "106"];
 
-    // 如果讀取到了 questions.json 就用它，否則用種子庫兜底，絕不卡下载
+    // 如果讀取到了 questions.json 就用它，否則用種子庫兜底
     let activeSourcePool = parsedBackupDatabase.length > 0 ? parsedBackupDatabase : internalFallbackDatabase;
 
     years.forEach(yr => {
-        // 洗滌比對年份：把國字扒光，只用純數字字串做精準過濾
+        // 【核心修正】洗滌比對年份：不再限制會計，只要年份相符，會計與經濟學通通抓進來統計題數！
         let yearQuestions = activeSourcePool.filter(q => {
             let qYear = q.year ? q.year.toString().replace(/[^\d]/g, "") : "";
             return qYear === yr;
@@ -718,10 +718,10 @@ function initPastExams() {
         card.className = "year-card";
         card.innerHTML = `
             <div class="year-card-header">
-                <span class="year-card-title">${yr}年統測會計</span>
-                <span class="year-card-status unstarted">歷屆真題</span>
+                <span class="year-card-title">${yr}年統測專業(二)</span>
+                <span class="year-card-status unstarted">歷屆全真題</span>
             </div>
-            <p class="year-card-detail">精選商管群專業二核心全量考古真題，支援動態多題速刷與盲點分析卡片。</p>
+            <p class="year-card-detail">收錄年度商管群核心考點真題，支援會計與經濟雙學科動態速刷。</p>
             <div class="year-card-footer">
                 <span>共 ${yearQuestions.length} 題</span>
                 <span>開始刷題 ➔</span>
@@ -733,9 +733,11 @@ function initPastExams() {
 }
 
 function loadPastExam(year) {
+    // 強制將年份清洗為純數字，百分之百精準對齊資料庫軌道！
     let cleanYear = year.toString().replace(/[^\d]/g, "");
     let activeSourcePool = parsedBackupDatabase.length > 0 ? parsedBackupDatabase : internalFallbackDatabase;
 
+    // 【核心修正】點擊字卡進去加載題目時，也要把該年份的「會計 + 經濟」雙科題目一起撈出來
     let yearQuestions = activeSourcePool.filter(q => {
         let qYear = q.year ? q.year.toString().replace(/[^\d]/g, "") : "";
         return qYear === cleanYear;
@@ -750,7 +752,7 @@ function loadPastExam(year) {
     examState.currentIndex = 0;
     examState.score = 0;
     examState.hasAnswered = false;
-    examState.wrongQuestions = []; // 確實滿血清空與初使化
+    examState.wrongQuestions = []; // 確實滿血清空與初始化
 
     document.getElementById("past-exams-intro-card").classList.add("hidden");
     document.getElementById("exam-player-card").classList.remove("hidden");
