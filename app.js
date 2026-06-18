@@ -656,269 +656,259 @@ function toggleAccordion(id) { const el = document.getElementById(id); if (el) e
 function jumpToTab(tabId) { switchTab(tabId); }
 
 // ==========================================================================
-// 12. 歷屆試題完全內嵌資料庫 — 113-115年 雙科核心30題 (完整格式)
+// 12. 歷屆試題完全內嵌資料庫 — 113-115年 雙科核心60題 (高密度防截斷版)
 // ==========================================================================
-
 const internalFallbackDatabase = [
-    // --- 115學年度 會計學 ---
-    { "id": 1, "subject": "accounting", "year": "115", "question": "關於財務報表之敘述，下列哪幾項正確？①現金流量表：表達企業特定期間內營業、投資及籌資活動對現金流入、流出之影響 ②權益變動表：表達企業特定期間內權益的變動情形及其結果 ③綜合損益表：根據收益與費損類帳戶編製而成，表達企業特定期間內的財務績效 ④資產負債表：根據資產、負債與權益類帳戶編製而成，表達企業特定期間內的財務狀況", "options": ["(A) 僅①", "(B) 僅①、②", "(C) 僅①、②、③", "(D) 僅②、③、④"], "answer": "C", "explanation": "綜合損益表表達特定期間財務績效；資產負債表表達特定日期財務狀況，故④錯誤。[cite: 1]" },
-    { "id": 2, "subject": "accounting", "year": "115", "question": "依據商業會計法，下列哪幾項應於年度決算程序辦理終了後，至少保存十年？①發票 ②傳票 ③日記簿 ④分類帳 ⑤資產負債表 ⑥綜合損益表", "options": ["(A) 僅①、②、③、④", "(B) 僅②、⑤、⑥", "(C) 僅②、③、④、⑤", "(D) 僅③、④、⑤、⑥"], "answer": "D", "explanation": "會計帳簿及財務報表應至少保存 10 年；憑證保存 5 年。[cite: 1]" },
-    { "id": 3, "subject": "accounting", "year": "115", "question": "關於會計基本概念之敘述，下列何者正確？", "options": ["(A) 支付員工薪資為對內交易", "(B) 因地震造成的存貨損失為對外交易", "(C) 汽車經銷商購入汽車以供出售，應將汽車認列為存貨", "(D) 禮品買賣業購入商品而支付運費，應將運費認列為營業費用"], "answer": "C", "explanation": "汽車經銷商購入以供出售之汽車屬於其主要營業商品，應列為存貨。[cite: 1]" },
-    { "id": 4, "subject": "accounting", "year": "115", "question": "關於日記簿及分類帳的記錄方式，下列哪幾項正確？①作分錄時應填寫日記簿的日頁欄 ②過帳時將日記簿之頁次轉記到分類帳的日頁欄 ③過帳時將分類帳之頁次記入日記簿的日頁欄", "options": ["(A) 僅①", "(B) 僅②", "(C) 僅①、③", "(D) 僅②、③"], "answer": "B", "explanation": "過帳時應將日記簿之頁次轉記至分類帳中。[cite: 1]" },
-    { "id": 5, "subject": "accounting", "year": "115", "question": "關於調整之敘述，下列哪幾項正確？①期末預付調整借方一定為實帳戶 ②應計基礎下期末應付借方一定為虛帳戶 ③記虛轉實法漏作調整淨利低估 ④漏作應收項目調整導致淨利低估", "options": ["(A) 僅①、③", "(B) 僅②、④", "(C) 僅①、②、④", "(D) 僅①、③、④"], "answer": "B", "explanation": "②與④之敘述完全符合應計基礎會計調整規範。[cite: 1]" },
-    // --- 115學年度 經濟學 ---
-    { "id": 6, "subject": "economics", "year": "115", "question": "林生規劃暑假活動偏好為飲料店打工 > 郵輪之旅 > 志工。最後參加郵輪之旅，則此決策的機會成本為何？", "options": ["(A) 郵輪之旅", "(B) 夏令營志工", "(C) 飲料店打工", "(D) 無機會成本"], "answer": "C", "explanation": "機會成本為放棄的選項中價值最高者，即飲料店打工。[cite: 1]" },
-    { "id": 7, "subject": "economics", "year": "115", "question": "小葉為荔枝供給者，其供給函數為 Qs = -10 + 20P。荔枝市場只有10家供給者且相同，均衡價格為5，則市場供給量為何？", "options": ["(A) 90", "(B) 450", "(C) 600", "(D) 900"], "answer": "D", "explanation": "市場 Qs = 10 * (-10 + 20P) = -100 + 200P。將 P=5 代入得 -100 + 1000 = 900。[cite: 1]" },
-    { "id": 8, "subject": "economics", "year": "115", "question": "兩條直線型供給曲線S1與S2皆通過原點。線上各點的供給彈性關係為何？", "options": ["(A) 各點供給彈性皆等於1", "(B) 各點供給彈性皆大於1", "(C) 各點供給彈性皆小於1", "(D) 無法判斷"], "answer": "A", "explanation": "通過原點的直線型供給曲線，其價格彈性在線上任何一點皆恆等於 1。[cite: 1]" },
-    { "id": 9, "subject": "economics", "year": "115", "question": "實質GDP為1,600億，基期年實質GDP為1,200億，當期物價上漲20%，則當期名目GDP為何？", "options": ["(A) 1,440億", "(B) 1,600億", "(C) 1,920億", "(D) 2,120億"], "answer": "C", "explanation": "物價上漲20%代表平減指數120。名目GDP = 1,600 * 1.2 = 1,920 億元。[cite: 1]" },
-    { "id": 10, "subject": "economics", "year": "115", "question": "臺灣外匯市場中吸引外資美元資金大幅湧進，下列敘述何者正確？", "options": ["(A) 需求右移，台幣貶值", "(B) 需求左移，台幣升值", "(C) 供給右移，台幣升值", "(D) 供給左移，台幣貶值"], "answer": "C", "explanation": "美元資金湧入代表美元供給增加（供給曲線右移），導致台幣相對升值。[cite: 1]" },
-
-    // --- 114學年度 會計學 ---
-    { "id": 11, "subject": "accounting", "year": "114", "question": "下列何者不屬於費損類會計項目？①預付費用 ②備抵損失———應收票據 ③銷項稅額 ④進項稅額 ⑤投資損失", "options": ["(A) 僅⑤", "(B) ①、②、③、④", "(C) ②、③、④", "(D) ①、③"], "answer": "B", "explanation": "①預付費用為資產；②備抵損失為資產減項；③銷項稅額為流動負債；④進項稅額為流動資產。四者均不屬於費損類。[cite: 2]" },
-    { "id": 12, "subject": "accounting", "year": "114", "question": "下列兩者分別違反何種會計假設？①公司董事長提取企業現金繳納個人貸款，記錄為清償公司的負債 ②企業運輸設備期末評價，採用清算價值", "options": ["(A) ①會計期間假設、②企業個體假設", "(B) ①貨幣評價假設、②繼續經營假設", "(C) ①繼續經營假設、②貨幣評價假設", "(D) ①企業個體假設、②繼續經營假設"], "answer": "D", "explanation": "①劃分企業與業主個人的責任，屬於『企業個體假設』；②正常經營中不應採清算價值評價，違反『繼續經營假設』。[cite: 2]" },
-    { "id": 13, "subject": "accounting", "year": "114", "question": "甲公司於過帳後發現錯誤：賒銷交易$3,000，過帳時發生借貸相反錯誤；暫收款帳戶借方重複過帳$1,000；正確調整分錄借:預收收入$2,000、貸:服務收入$2,000漏作。上述錯誤對餘額式試算表影響為何？", "options": ["(A) 借方餘額少計$3,000，貸方餘額少計$4,000", "(B) 借方餘額少計$4,000，貸方餘額少計$5,000", "(C) 借方餘額少計$7,000，貸方餘額少計$8,000", "(D) 借方餘額多計$1,000，貸方餘額少計$2,000"], "answer": "C", "explanation": "賒銷反記：借方少$6,000，貸方少$6,000。暫收款借方重過：借方多$1,000。調整漏過：借貸兩邊各少$2,000。綜合：借方淨少 $7,000，貸方淨少 $8,000。[cite: 2]" },
-    { "id": 14, "subject": "accounting", "year": "114", "question": "採用定期盤存制之下，本年期初存貨為$58,000，期末經盤點後存貨為$60,000，本年進貨$127,000，則在期末調整及結帳前，「存貨」帳戶之餘額為何？", "options": ["(A) $58,000", "(B) $60,000", "(C) $127,000", "(D) $185,000"], "answer": "A", "explanation": "定期盤存制下，平時不變動『存貨』帳戶。因此在期末調整結帳前，存貨帳戶餘額維持期初存貨金額 $58,000。[cite: 2]" },
-    { "id": 15, "subject": "accounting", "year": "114", "question": "公司本期權責基礎租金收入為$400,000，且預收租金期初餘額為$22,500，期末餘額為$42,500，則採現金基礎與權責基礎之下，本期租金收入的差異為何？", "options": ["(A) 現金基礎比權責基礎少$20,000", "(B) 現金基礎比權責基礎多$20,000", "(C) 現金基礎與權責基礎相同", "(D) 現金基礎比權責基礎多$42,500"], "answer": "B", "explanation": "現金基礎收入 = 權責基礎收入 $400,000 + 期末預收變動增加數($42,500 - $22,500) = $420,000。因此現金基礎比權責基礎多 $20,000。[cite: 2]" },
-    // --- 114學年度 經濟學 ---
-    { "id": 16, "subject": "economics", "year": "114", "question": "關於獨占廠商價格與收益的敘述，下列何者正確？", "options": ["(A) 價格P > 平均收益 AR", "(B) 邊際收益 MR < 平均收益 AR", "(C) 平均收益 AR及邊際收益MR為水平線", "(D) 總收益 TR達到最大時，邊際收益 MR > 0"], "answer": "B", "explanation": "獨占廠商面對負斜率需求線，故 P = AR。其邊際收益線 MR 位於 AR 線的下方，故 MR < AR 正確。[cite: 2]" },
-    { "id": 17, "subject": "economics", "year": "114", "question": "依據邊際生產力理論，若工人之邊際生產收益(MRPL)為100單位，而市場工資為120單位。為達利潤最大化，廠商應採取何種行為？", "options": ["(A) 增加產品訂價", "(B) 減少產品訂價", "(C) 減少工人雇用量", "(D) 增加工人雇用量"], "answer": "C", "explanation": "此時邊際生產收益 (100) < 工資成本 (120)，代表多僱用一個工人的效益小於成本，廠商應減少工人的僱用量以求極大化利潤。[cite: 2]" },
-    { "id": 18, "subject": "economics", "year": "114", "question": "兩筆土地年租金分別為200萬元及120萬元。若當前市場年利率為4%，則這兩筆土地合理地價合計為多少？", "options": ["(A) 8000萬元", "(B) 6000萬元", "(C) 5000萬元", "(D) 3200萬元"], "answer": "A", "explanation": "依據地價公式（地價 = 地租 / 利率），總地價 = (200萬 / 0.04) + (120萬 / 0.04) = 5000萬 + 3000萬 = 8000萬元。[cite: 2]" },
-    { "id": 19, "subject": "economics", "year": "114", "question": "假設均衡所得 Y = C + I + G，其中 C = 100 + 0.5(Y - T)、稅收 T = 50、I = 300、G = 100，則均衡所得 Y 為何？", "options": ["(A) 800", "(B) 850", "(C) 950", "(D) 1000"], "answer": "C", "explanation": "Y = 100 + 0.5(Y - 50) + 300 + 100 ➔ Y = 475 + 0.5Y ➔ 0.5Y = 475 ➔ Y = 950。[cite: 2]" },
-    { "id": 20, "subject": "economics", "year": "114", "question": "中央銀行如果採取緊縮性的貨幣政策，在其他條件不變下，市場利率與貨幣供給會如何變動？", "options": ["(A) 貨幣供給增加，利率上升", "(B) 貨幣供給減少，利率上升", "(C) 貨幣供給減少，利率下降", "(D) 貨幣供給增加，利率下降"], "answer": "B", "explanation": "央行緊縮銀根會導致市場貨幣供給量減少，資金稀缺進而引導借貸利率上升。[cite: 2]" },
-
-    // ----------------- 113學年度 會計學 ---
-    { "id": 21, "subject": "accounting", "year": "113", "question": "甲公司為非公開發行公司，其會計事務處理之各項法令及準則的適用位階最高與最低者為何？", "options": ["(A) 商業會計處理準則 > 商業會計法 > 企業會計準則公報", "(B) 公司法 > 商業會計處理準則 > 企業會計準則公報", "(C) 企業會計準則公報 > 商業會計處理準則 > 公司法", "(D) 商業會計法 > 企業會計準則公報 > 公司法"], "answer": "B", "explanation": "法律（如公司法、商會法）效力最高，其次為法規命令（商業會計處理準則），最低者為自律公報（企業會計準則公報）。[cite: 2]" },
-    { "id": 22, "subject": "accounting", "year": "113", "question": "下列何者符合會計財務報表要素之定義與認列條件？", "options": ["(A) 企業自主投入且未來效益不確定的研究發展支出", "(B) 企業經營者優異的團隊精神與經營誠信", "(C) 員工高度專業學歷為公司帶來潛在的無形價值", "(D) 公司擁有的專利權等可由企業控制且具備未來經濟資源者"], "answer": "D", "explanation": "專利權能由企業排他性控制，且具備未來明確的經濟效益流入，符合資產要素定義。其餘選項因無法可靠計量或無法排他控制而不符。[cite: 2]" },
-    { "id": 23, "subject": "accounting", "year": "113", "question": "甲商店賒購商品一批$11,000，當場支付三個月期的商業本票$8,000，餘款暫欠，則此交易種類及適用的複式傳票為何？", "options": ["(A) 轉帳交易；分錄轉帳傳票", "(B) 轉帳交易；現金轉帳傳票", "(C) 混合交易；分錄轉帳傳票", "(D) 混合交易；現金轉帳傳票"], "answer": "A", "explanation": "此筆交易完全不涉及任何現金收付，屬於轉帳交易，適用分錄轉帳傳票。[cite: 2]" },
-    { "id": 24, "subject": "accounting", "year": "113", "question": "甲公司賒購商品一批以八折成交，信用條件為2/10, 1/15, n/30，採淨額法。因品質不佳進貨退出$2,000。公司於10天內付清第一筆實際支付$7,350，另於第15天後支付剩餘款項$9,900，則商品最初定價為何？", "options": ["(A) $17,500", "(B) $21,750", "(C) $24,250", "(D) $24,375"], "answer": "C", "explanation": "淨額法下：享折扣付 7,350 / 0.98 = $7,500。未享折扣付 $9,900。總淨額 = 7,500 + 9,900 = $17,400。還原進退 $2,000 為 $19,400。最初定價 = 19,400 / 0.8 = $24,250。[cite: 2]" },
-    { "id": 25, "subject": "accounting", "year": "113", "question": "公司將現金購貨$2,000的交易錯誤記錄為借:應付帳款$2,000及貸:現金$2,000，該錯誤對試算表之影響為何？", "options": ["(A) 試算表仍平衡，且借貸總和正確", "(B) 試算表仍平衡，但借貸方總額皆高估$2,000", "(C) 試算表不平衡，借貸相差$4,000", "(D) 試算表仍平衡，但借貸方總額皆低估$2,000"], "answer": "B", "explanation": "此錯誤將借方存貨誤記為借記應付帳款。借方科目放錯但金額不變，且貸方完全正確，故試算表依然平衡，借貸總額維持不變。[cite: 2]" },
-    // --- 113學年度 經濟學 ---
-    { "id": 26, "subject": "economics", "year": "113", "question": "關於凹向原點的生產可能曲線(PPC)之敘述，下列何者錯誤？", "options": ["(A) 線上各點代表已經達到充分就業", "(B) 從線上A點移到B點的機會成本為零", "(C) 線上各點皆已達生產效率", "(D) 生產可能曲線向外移動代表經濟成長"], "answer": "B", "explanation": "生產可能曲線為負斜率，增加一項產品產量必然要放棄另一項產品的產量，機會成本不可能為0。[cite: 2]" },
-    { "id": 27, "subject": "economics", "year": "113", "question": "市場中只有A、B兩人的反需求函數分別為：P = 10 - 2qA，P = 10 - 2qB，則市場需求量(Q)與價格(P)的關係為下列何者？", "options": ["(A) P = 10 - Q", "(B) P = 10 - 2Q", "(C) P = 20 - 2Q", "(D) P = 20 - 4Q"], "answer": "A", "explanation": "轉換為數量函數：qA = 5 - 0.5P，qB = 5 - 0.5P。水平加總市場需求 Q = qA + qB = 10 - P。重新整理即得 P = 10 - Q。[cite: 2]" },
-    { "id": 28, "subject": "economics", "year": "113", "question": "若供給函數由 Qs = -10 + 2P 變成 Qs = -20 + 2P，其可能原因為何？", "options": ["(A) 該商品價格下跌", "(B) 該商品價格上漲", "(C) 生產成本增加", "(D) 生產成本減少"], "answer": "C", "explanation": "相同價格下供給量減少，代表整條供給曲線向左上方移動（供給減少），主因通常為生產原料等投入成本上升。[cite: 2]" },
-    { "id": 29, "subject": "economics", "year": "113", "question": "已知所得為90元，全部用來購買X與Y兩種商品，Px = 10，Py = 20，若邊際效用 MUx = 2X，MUy = Y，則要如何消費才能達到總效用極大化？", "options": ["(A) X = 5, Y = 2", "(B) X = 3, Y = 3", "(C) X = 1, Y = 4", "(D) X = 4, Y = 1"], "answer": "D", "explanation": "消費者均衡條件：MUx/Px = MUy/Py ➔ 2X/10 = Y/20 ➔ 4X = Y。代入預算線：10X + 20(4X) = 90 ➔ 90X = 90 ➔ X = 1, Y = 4。[cite: 2]" },
-    { "id": 30, "subject": "economics", "year": "113", "question": "二氧化碳的排放量超碼，在經濟學上最適合用下列哪一個概念來解釋市場失靈？", "options": ["(A) 公共財", "(B) 負的外部性", "(C) 資訊不對稱", "(D) 自然獨占"], "answer": "B", "explanation": "排放二氧化碳超標會對外界環境帶來損害，但排放者未承擔此代價，屬於典型的外部成本（負的外部性）。[cite: 2]" }
+    // 115年 會計學 (10題)
+    { "id": 1, "subject": "accounting", "year": "115", "question": "關於財務報表之敘述，何者正確？", "options": ["現金流量表為特定日期", "綜合損益表為特定日期", "資產負債表為特定日期", "權益變動表為特定日期"], "answerIndex": 2, "explanation": "資產負債表表達特定日期的財務狀況，其餘報表皆為特定期間。" },
+    { "id": 2, "subject": "accounting", "year": "115", "question": "依商業會計法，會計帳簿應於決算後至少保存幾年？", "options": ["3年", "5年", "10年", "15年"], "answerIndex": 2, "explanation": "會計帳簿及財務報表保存10年，會計憑證保存5年。" },
+    { "id": 3, "subject": "accounting", "year": "115", "question": "汽車經銷商購入汽車以供出售，應認列為？", "options": ["運輸設備", "存貨", "預付費用", "營業外支出"], "answerIndex": 1, "explanation": "供日常營業出售之商品應認列為存貨。" },
+    { "id": 4, "subject": "accounting", "year": "115", "question": "過帳時，應將分類帳之頁次記入日記簿的何欄？", "options": ["摘要欄", "類頁欄", "日頁欄", "金額欄"], "answerIndex": 1, "explanation": "分類帳頁次記入日記簿的類頁欄，日記簿頁次記入分類帳的日頁欄。" },
+    { "id": 5, "subject": "accounting", "year": "115", "question": "應計基礎下，期末漏作應收收益之調整分錄將導致？", "options": ["資產低估，淨利低估", "資產高估，淨利高估", "負債低估，淨利高估", "權益高估，淨利低估"], "answerIndex": 0, "explanation": "漏計應收收益(借：資產，貸：收益)，將使資產及淨利皆低估。" },
+    { "id": 6, "subject": "accounting", "year": "115", "question": "折舊漏計對財務報表的影響為何？", "options": ["資產高估，淨利高估", "資產低估，淨利低估", "負債高估，淨利高估", "費用高估，權益低估"], "answerIndex": 0, "explanation": "漏計折舊(費用未增、累計折舊未增)，導致費用低估(淨利高估)與資產高估。" },
+    { "id": 7, "subject": "accounting", "year": "115", "question": "買賣業進貨支付之運費，應計入？", "options": ["營業費用", "進貨成本", "銷貨成本", "管理費用"], "answerIndex": 1, "explanation": "進貨運費為取得商品之必要支出，列為進貨成本加項。" },
+    { "id": 8, "subject": "accounting", "year": "115", "question": "下列何者為流動負債？", "options": ["預付費用", "應收帳款", "預收收入", "專利權"], "answerIndex": 2, "explanation": "預收收入為未來需提供商品或勞務之義務，屬流動負債。" },
+    { "id": 9, "subject": "accounting", "year": "115", "question": "權責發生制下，未作應付費用調整分錄會導致？", "options": ["負債低估，淨利高估", "負債高估，淨利低估", "資產低估，淨利高估", "權益低估，淨利低估"], "answerIndex": 0, "explanation": "漏記借:費用、貸:應付費用，導致費用低估(淨利高估)及負債低估。" },
+    { "id": 10, "subject": "accounting", "year": "115", "question": "結帳時，各項收益與費損科目應結轉至？", "options": ["保留盈餘", "本期損益", "資本公積", "業主資本"], "answerIndex": 1, "explanation": "期末虛帳戶須結轉至「本期損益」帳戶以結清餘額。" },
+    // 115年 經濟學 (10題)
+    { "id": 11, "subject": "economics", "year": "115", "question": "參加郵輪之旅，放棄飲料店打工與志工，偏好打工大於志工，機會成本為何？", "options": ["郵輪之旅", "飲料店打工", "志工", "無法計算"], "answerIndex": 1, "explanation": "機會成本為放棄選項中價值最高者(飲料店打工)。" },
+    { "id": 12, "subject": "economics", "year": "115", "question": "Qs = -10 + 20P，市場有10家相同廠商，價格為5時市場供給量為何？", "options": ["90", "450", "900", "1000"], "answerIndex": 2, "explanation": "市場供給 = 10 * (-10+20P) = -100+200P，代入 P=5 得 900。" },
+    { "id": 13, "subject": "economics", "year": "115", "question": "通過原點之直線型供給曲線，其線上各點的供給彈性？", "options": ["等於1", "大於1", "小於1", "不固定"], "answerIndex": 0, "explanation": "通過原點的直線供給曲線，價格彈性恆等於1。" },
+    { "id": 14, "subject": "economics", "year": "115", "question": "實質GDP 1600億，物價上漲20%，名目GDP為何？", "options": ["1440億", "1600億", "1920億", "2120億"], "answerIndex": 2, "explanation": "名目GDP = 1600 * 1.2 = 1920億。" },
+    { "id": 15, "subject": "economics", "year": "115", "question": "外資美元大量湧入台灣外匯市場，將導致？", "options": ["美元需求右移", "美元供給右移", "台幣貶值", "不利進口"], "answerIndex": 1, "explanation": "美元資金湧入代表美元供給增加(右移)，台幣升值。" },
+    { "id": 16, "subject": "economics", "year": "115", "question": "市場產生超額需求時，價格將？", "options": ["下降", "上升", "不變", "無關"], "answerIndex": 1, "explanation": "超額需求(供不應求)將推升價格至均衡點。" },
+    { "id": 17, "subject": "economics", "year": "115", "question": "生產要素市場的供給者為？", "options": ["政府", "企業", "家戶", "國外"], "answerIndex": 2, "explanation": "家戶(勞工家庭)提供勞動與土地，為要素市場供給者。" },
+    { "id": 18, "subject": "economics", "year": "115", "question": "總效用(TU)達到最大時，邊際效用(MU)為何？", "options": ["最大", "大於零", "等於零", "小於零"], "answerIndex": 2, "explanation": "TU曲線頂點對應之MU為零。" },
+    { "id": 19, "subject": "economics", "year": "115", "question": "完全競爭廠商面對的需求曲線形狀為？", "options": ["垂直線", "水平線", "正斜率", "負斜率"], "answerIndex": 1, "explanation": "完全競爭廠商為價格接受者，面對完全彈性的水平需求線。" },
+    { "id": 20, "subject": "economics", "year": "115", "question": "獨占廠商的邊際收益(MR)與平均收益(AR)關係為何？", "options": ["MR > AR", "MR = AR", "MR < AR", "無關聯"], "answerIndex": 2, "explanation": "獨占廠商面對負斜率需求線，MR 位於 AR 下方。" },
+    // 114年 會計學 (10題)
+    { "id": 21, "subject": "accounting", "year": "114", "question": "下列何者不屬費損類？", "options": ["進項稅額", "薪資費用", "折舊", "投資損失"], "answerIndex": 0, "explanation": "進項稅額為流動資產。" },
+    { "id": 22, "subject": "accounting", "year": "114", "question": "董事長提公司現金繳個人貸款，違反何種假設？", "options": ["繼續經營", "企業個體", "貨幣評價", "會計期間"], "answerIndex": 1, "explanation": "公私帳務未分違反企業個體假設。" },
+    { "id": 23, "subject": "accounting", "year": "114", "question": "定期盤存制下，期初存貨58,000，期末盤點60,000，調整前「存貨」餘額為？", "options": ["0", "58,000", "60,000", "118,000"], "answerIndex": 1, "explanation": "定期盤存制平時不動存貨帳戶，調整前維持期初金額。" },
+    { "id": 24, "subject": "accounting", "year": "114", "question": "權責基礎租金收入40萬，預收期初2.25萬、期末4.25萬。現金基礎收入為何？", "options": ["38萬", "40萬", "42萬", "44萬"], "answerIndex": 2, "explanation": "400,000 + (42,500 - 22,500) = 420,000。" },
+    { "id": 25, "subject": "accounting", "year": "114", "question": "設備購買誤記修繕費用，影響為何？", "options": ["資產高估", "淨利低估", "負債高估", "費用低估"], "answerIndex": 1, "explanation": "資本支出誤記為收益支出，費用高估、淨利低估、資產低估。" },
+    { "id": 26, "subject": "accounting", "year": "114", "question": "下列何者會導致試算表不平衡？", "options": ["漏記分錄", "重複過帳", "借方金額少計", "借方誤記他科"], "answerIndex": 2, "explanation": "單邊金額少計直接打破借貸恆等。" },
+    { "id": 27, "subject": "accounting", "year": "114", "question": "轉帳傳票屬於？", "options": ["對外憑證", "原始憑證", "記帳憑證", "外來憑證"], "answerIndex": 2, "explanation": "傳票為會計人員編製之內部記帳憑證。" },
+    { "id": 28, "subject": "accounting", "year": "114", "question": "借方在帳戶物理位置上代表？", "options": ["增加", "減少", "左邊", "右邊"], "answerIndex": 2, "explanation": "借方恆為左邊，貸方恆為右邊。" },
+    { "id": 29, "subject": "accounting", "year": "114", "question": "銀行存款調節表中，「未兌現支票」應如何調整？", "options": ["公司帳加", "公司帳減", "銀行帳加", "銀行帳減"], "answerIndex": 3, "explanation": "公司已扣但銀行未扣，故應自銀行對帳單餘額中減除。" },
+    { "id": 30, "subject": "accounting", "year": "114", "question": "雙倍餘額遞減法第一年折舊計算特色為何？", "options": ["需先扣殘值", "不扣殘值", "依產量計算", "金額最低"], "answerIndex": 1, "explanation": "該法期初不扣除預估殘值，直接以帳面價值乘以折舊率。" },
+    // 114年 經濟學 (10題)
+    { "id": 31, "subject": "economics", "year": "114", "question": "邊際生產收益(MRPL)100，工資120，廠商應？", "options": ["增加雇用", "減少雇用", "不變", "提高價格"], "answerIndex": 1, "explanation": "MRPL < 工資，增加雇用會減少利潤，應減僱。" },
+    { "id": 32, "subject": "economics", "year": "114", "question": "租金200萬與120萬，利率4%，兩地總地價？", "options": ["5000萬", "6000萬", "8000萬", "9000萬"], "answerIndex": 2, "explanation": "(200+120)/4% = 8000萬。" },
+    { "id": 33, "subject": "economics", "year": "114", "question": "Y=100+0.5(Y-50)+300+100，均衡所得Y？", "options": ["850", "900", "950", "1000"], "answerIndex": 2, "explanation": "Y = 475 + 0.5Y -> 0.5Y = 475 -> Y = 950。" },
+    { "id": 34, "subject": "economics", "year": "114", "question": "央行採取緊縮貨幣政策，利率與供給變動？", "options": ["供給增，利率降", "供給減，利率升", "供給增，利率升", "供給減，利率降"], "answerIndex": 1, "explanation": "緊縮使貨幣供給減少，資金短缺推升利率。" },
+    { "id": 35, "subject": "economics", "year": "114", "question": "具備非排他性與非對立性的財貨為？", "options": ["私人財", "公共財", "準公共財", "共有資源"], "answerIndex": 1, "explanation": "公共財具備無法排除及共享不減損價值的雙重特性。" },
+    { "id": 36, "subject": "economics", "year": "114", "question": "需求彈性大於1，降價將使總收益？", "options": ["減少", "增加", "不變", "歸零"], "answerIndex": 1, "explanation": "富彈性商品降價幅度小於數量增加幅度，總收益上升。" },
+    { "id": 37, "subject": "economics", "year": "114", "question": "引進先進生產技術會使生產可能曲線(PPC)？", "options": ["點在線上移動", "向內移", "向外移", "不變"], "answerIndex": 2, "explanation": "技術進步提升潛在產能，PPC整條向外移動。" },
+    { "id": 38, "subject": "economics", "year": "114", "question": "流動性陷阱時，貨幣需求利率彈性為？", "options": ["零", "小於一", "等於一", "無限大"], "answerIndex": 3, "explanation": "流動性陷阱下，大眾預期利率跌無可跌，投機需求彈性無限大。" },
+    { "id": 39, "subject": "economics", "year": "114", "question": "恩格爾係數越高的國家代表？", "options": ["生活水準高", "生活水準低", "貧富均等", "無關"], "answerIndex": 1, "explanation": "飲食支出佔比越高，代表生活水準較低。" },
+    { "id": 40, "subject": "economics", "year": "114", "question": "停滯性通貨膨脹的特徵為？", "options": ["物價跌、失業降", "物價升、失業降", "物價升、失業升", "物價跌、失業升"], "answerIndex": 2, "explanation": "停滯性通膨(Stagflation)代表高通膨與高失業率同時並存。" },
+    // 113年 會計學 (10題)
+    { "id": 41, "subject": "accounting", "year": "113", "question": "會計法令位階最高與最低排序為何？", "options": ["商會法 > 準則公報", "公司法 > 準則公報", "準則公報 > 商會法", "處理準則 > 公司法"], "answerIndex": 1, "explanation": "法律(公司法)>法規命令(處理準則)>自律公報(企業會計準則)。" },
+    { "id": 42, "subject": "accounting", "year": "113", "question": "下列何者符合資產認列條件？", "options": ["企業團隊精神", "專利權", "員工學歷", "研發支出(未確定)"], "answerIndex": 1, "explanation": "專利權具備排他控制權及未來經濟效益流入。" },
+    { "id": 43, "subject": "accounting", "year": "113", "question": "賒購付商業本票餘款暫欠，適用何種傳票？", "options": ["現金收入", "現金支出", "分錄轉帳", "現金轉帳"], "answerIndex": 2, "explanation": "未涉及現金收付之交易，適用分錄轉帳傳票。" },
+    { "id": 44, "subject": "accounting", "year": "113", "question": "備抵法沖銷無法收回之壞帳，對權益影響？", "options": ["增加", "減少", "不變", "不確定"], "answerIndex": 2, "explanation": "借:備抵損失、貸:應收帳款，資產內部抵銷，不影響損益與權益。" },
+    { "id": 45, "subject": "accounting", "year": "113", "question": "銷項稅額大於進項稅額時，差額應認列？", "options": ["應納稅額", "留抵稅額", "營業費用", "預付稅款"], "answerIndex": 0, "explanation": "銷項大於進項，表示需向政府繳納，列為流動負債(應納稅額)。" },
+    { "id": 46, "subject": "accounting", "year": "113", "question": "每年折舊費用皆固定相等的提列法為何？", "options": ["生產數量法", "年數合計法", "直線法", "雙倍餘額法"], "answerIndex": 2, "explanation": "直線法(平均法)將成本均攤於各年，每年折舊額相等。" },
+    { "id": 47, "subject": "accounting", "year": "113", "question": "何者屬於實帳戶需結轉下期？", "options": ["銷貨收入", "租金支出", "應收帳款", "利息費用"], "answerIndex": 2, "explanation": "實帳戶為資產、負債、權益，應收帳款屬之。" },
+    { "id": 48, "subject": "accounting", "year": "113", "question": "未作應收利息調整分錄會導致？", "options": ["資產低估，淨利低估", "負債低估", "收益高估", "權益高估"], "answerIndex": 0, "explanation": "漏計應收與利息收入，兩者皆低估。" },
+    { "id": 49, "subject": "accounting", "year": "113", "question": "無形資產成本分攤的會計程序稱為？", "options": ["折耗", "折舊", "攤銷", "減損"], "answerIndex": 2, "explanation": "無形資產(如專利權)成本之系統性分攤稱為攤銷(Amortization)。" },
+    { "id": 50, "subject": "accounting", "year": "113", "question": "會計上「左借右貸」的法則基礎來自於？", "options": ["商業習慣", "會計方程式", "政府規定", "稅法要求"], "answerIndex": 1, "explanation": "借貸法則源自於「資產 = 負債 + 權益」的雙式簿記恆等式。" },
+    // 113年 經濟學 (10題)
+    { "id": 51, "subject": "economics", "year": "113", "question": "關於凹向原點的PPC，何者錯誤？", "options": ["線上代表充分就業", "移動的機會成本為零", "線上達生產效率", "外移代表經濟成長"], "answerIndex": 1, "explanation": "線上移動必然增加一物而減少另一物，機會成本大於零。" },
+    { "id": 52, "subject": "economics", "year": "113", "question": "P=10-2qA與P=10-2qB，市場需求為何？", "options": ["P=10-Q", "P=20-2Q", "P=10-2Q", "P=20-Q"], "answerIndex": 0, "explanation": "水平加總 qA=5-0.5P, qB=5-0.5P 得 Q=10-P，即 P=10-Q。" },
+    { "id": 53, "subject": "economics", "year": "113", "question": "二氧化碳排放超標為市場失靈的哪種概念？", "options": ["公共財", "資訊不對稱", "負的外部性", "獨占"], "answerIndex": 2, "explanation": "造成他人損害而未付成本，為外部成本(負的外部性)。" },
+    { "id": 54, "subject": "economics", "year": "113", "question": "所得彈性小於零的財貨稱為？", "options": ["正常財", "劣等財", "季芬財", "奢侈財"], "answerIndex": 1, "explanation": "所得增加反而減少購買量，為劣等財。" },
+    { "id": 55, "subject": "economics", "year": "113", "question": "景氣低迷時政府應採取何種財政政策？", "options": ["增稅", "減少支出", "減稅並增加公建", "提高利率"], "answerIndex": 2, "explanation": "擴張性財政政策(減稅、增支出)能刺激總需求。" },
+    { "id": 56, "subject": "economics", "year": "113", "question": "羅倫茲曲線偏離對角線越遠代表？", "options": ["所得越平均", "貧富差距大", "吉尼係數小", "經濟成長快"], "answerIndex": 1, "explanation": "下凹越深，代表財富分配越不均、貧富差距越大。" },
+    { "id": 57, "subject": "economics", "year": "113", "question": "何者計入台灣當期GDP？", "options": ["二手車車價", "海外工廠收入", "買股票本金", "國內生產出口晶片"], "answerIndex": 3, "explanation": "GDP限於國內當期生產之最終財貨，出口晶片計入本國GDP。" },
+    { "id": 58, "subject": "economics", "year": "113", "question": "防止獨占企業聯合壟斷的法規是？", "options": ["公司法", "公平交易法", "商標法", "勞基法"], "answerIndex": 1, "explanation": "公平交易法旨在維護交易秩序與公平競爭，防止壟斷。" },
+    { "id": 59, "subject": "economics", "year": "113", "question": "廠商短期歇業點(Shutdown Point)的條件為？", "options": ["P < ATC", "P < AFC", "P < AVC", "P < MC"], "answerIndex": 2, "explanation": "當價格低於平均變動成本(AVC)時，繼續生產將損失更多，應歇業。" },
+    { "id": 60, "subject": "economics", "year": "113", "question": "凱因斯學派認為解決經濟蕭條的最佳工具是？", "options": ["貨幣政策", "財政政策", "自由放任", "供給面政策"], "answerIndex": 1, "explanation": "凱因斯主張政府應積極介入，以擴張性財政政策填補有效需求不足。" }
 ];
 
+let examState = { currentYear: null, questions: [], currentIndex: 0, score: 0, hasAnswered: false, wrongQuestions: [] };
+
 function initPastExams() {
-    document.getElementById("past-exams-intro-card").classList.remove("hidden");
-    document.getElementById("exam-player-card").classList.add("hidden");
-    document.getElementById("exam-results-card").classList.add("hidden");
+    try {
+        const introCard = document.getElementById("past-exams-intro-card") || document.querySelector(".intro-card");
+        if (introCard) introCard.classList.remove("hidden");
+        const playerCard = document.getElementById("exam-player-card") || document.querySelector(".player-card");
+        if (playerCard) playerCard.classList.add("hidden");
+        const resultsCard = document.getElementById("exam-results-card") || document.querySelector(".results-card");
+        if (resultsCard) resultsCard.classList.add("hidden");
 
-    const grid = document.getElementById("year-selector-grid");
-    if (!grid) return;
-    grid.innerHTML = "";
+        const grid = document.getElementById("year-selector-grid");
+        if (!grid) return;
+        grid.innerHTML = "";
 
-    const years = ["115", "114", "113", "112", "111", "110", "109", "108", "107", "106"];
+        const years = ["115", "114", "113", "112", "111", "110", "109", "108", "107", "106"];
 
-    years.forEach(yr => {
-        let yearQuestions = internalFallbackDatabase.filter(q => {
-            let qYear = q.year ? q.year.toString().replace(/[^\d]/g, "") : "";
-            return qYear === yr;
+        years.forEach(yr => {
+            let yearQuestions = internalFallbackDatabase.filter(q => {
+                let qYear = q.year ? q.year.toString().replace(/[^\d]/g, "") : "";
+                return qYear === yr;
+            });
+
+            const card = document.createElement("div");
+            card.className = "year-card";
+            card.innerHTML = `
+                <div class="year-card-header">
+                    <span class="year-card-title">${yr}年統測專業(二)</span>
+                    <span class="year-card-status unstarted">全真模擬</span>
+                </div>
+                <p class="year-card-detail">精選商管群核心真題，內建 ${yearQuestions.length} 題雙科考點，支援盲點分析。</p>
+                <div class="year-card-footer">
+                    <span>共 ${yearQuestions.length} 題</span>
+                    <span>開始刷題 ➔</span>
+                </div>
+            `;
+            card.onclick = () => loadPastExam(yr);
+            grid.appendChild(card);
         });
-
-        let detailTxt = `精選商管群專業二核心全量考古真題，內建 ${yearQuestions.length} 題全學科考點，支援盲點大補帖分析。`;
-        if (yr === "115") detailTxt = "最新115學年度統測專業二核心會計與經濟全真題，含最新命題大綱解析。";
-        if (yr === "114") detailTxt = "收錄114年試題：包含資產負債重分類、定期盤存、獨占與緊縮貨幣政策。";
-        if (yr === "113") detailTxt = "收錄113年試題：包含會計適用位階、轉帳傳票、PPC與消費者均衡計算。";
-
-        const card = document.createElement("div");
-        card.className = "year-card";
-        card.innerHTML = `
-            <div class="year-card-header">
-                <span class="year-card-title">${yr}年統測專業(二)</span>
-                <span class="year-card-status unstarted">全真模擬</span>
-            </div>
-            <p class="year-card-detail">${detailTxt}</p>
-            <div class="year-card-footer">
-                <span>共 ${yearQuestions.length} 題</span>
-                <span>開始刷題 ➔</span>
-            </div>
-        `;
-        card.onclick = () => loadPastExam(yr);
-        grid.appendChild(card);
-    });
+    } catch (e) { console.error(e); }
 }
 
 function loadPastExam(year) {
-    let cleanYear = year.toString().replace(/[^\d]/g, "");
-    let yearQuestions = internalFallbackDatabase.filter(q => q.year.toString().replace(/[^\d]/g, "") === cleanYear);
+    try {
+        let cleanYear = year.toString().replace(/[^\d]/g, "");
+        let yearQuestions = internalFallbackDatabase.filter(q => q.year.toString().replace(/[^\d]/g, "") === cleanYear);
 
-    examState.currentYear = cleanYear;
-    examState.questions = yearQuestions;
-    examState.currentIndex = 0;
-    examState.score = 0;
-    examState.hasAnswered = false;
-    examState.wrongQuestions = [];
+        examState.currentYear = cleanYear;
+        examState.questions = yearQuestions;
+        examState.currentIndex = 0;
+        examState.score = 0;
+        examState.hasAnswered = false;
+        examState.wrongQuestions = [];
 
-    document.getElementById("past-exams-intro-card").classList.add("hidden");
-    document.getElementById("exam-player-card").classList.remove("hidden");
-    document.getElementById("exam-results-card").classList.add("hidden");
+        const introCard = document.getElementById("past-exams-intro-card") || document.querySelector(".intro-card");
+        if (introCard) introCard.classList.add("hidden");
+        const playerCard = document.getElementById("exam-player-card") || document.querySelector(".player-card");
+        if (playerCard) playerCard.classList.remove("hidden");
+        const resultsCard = document.getElementById("exam-results-card") || document.querySelector(".results-card");
+        if (resultsCard) resultsCard.classList.add("hidden");
 
-    const nextBtn = document.getElementById("btn-next-exam-question");
-    if (nextBtn) nextBtn.onclick = nextExamQuestion;
-
-    renderExamQuestion();
+        const nextBtn = document.getElementById("btn-next-exam-question");
+        if (nextBtn) nextBtn.onclick = nextExamQuestion;
+        renderExamQuestion();
+    } catch (e) { alert("讀取題庫發生錯誤！"); }
 }
 
 function renderExamQuestion() {
-    const qData = examState.questions[examState.currentIndex];
-    const categoryPrefix = qData.subject === 'accounting' ? '【會計學】' : '【經濟學】';
+    try {
+        const qData = examState.questions[examState.currentIndex];
+        if (!qData) return;
+        const categoryPrefix = qData.subject === 'accounting' ? '【會計學】' : '【經濟學】';
 
-    document.getElementById("exam-title-badge").innerText = `${examState.currentYear}年統測專業二全真題`;
-    document.getElementById("exam-progress-label").innerText = `第 ${examState.currentIndex + 1} 題 / 共 ${examState.questions.length} 題`;
-    document.getElementById("exam-question-text").innerText = categoryPrefix + qData.question;
+        const badge = document.getElementById("exam-title-badge") || document.getElementById("exam-title");
+        if (badge) badge.innerText = `${examState.currentYear}年統測專業二全真題`;
 
-    const optionsList = document.getElementById("exam-options-list");
-    if (optionsList) {
-        optionsList.innerHTML = "";
-        qData.options.forEach((opt, idx) => {
-            const btn = document.createElement("button");
-            btn.className = "exam-option-btn";
-            btn.innerHTML = `<span>${opt}</span>`;
-            btn.onclick = () => selectExamOption(idx, btn);
-            optionsList.appendChild(btn);
-        });
-    }
+        const progress = document.getElementById("exam-progress-label") || document.getElementById("exam-progress");
+        if (progress) progress.innerText = `第 ${examState.currentIndex + 1} 題 / 共 ${examState.questions.length} 題`;
 
-    document.getElementById("exam-feedback-box").classList.add("hidden");
-    examState.hasAnswered = false;
+        const qText = document.getElementById("exam-question-text") || document.getElementById("question-text");
+        if (qText) qText.innerText = categoryPrefix + qData.question;
+
+        const optionsList = document.getElementById("exam-options-list") || document.getElementById("options-list");
+        if (optionsList) {
+            optionsList.innerHTML = "";
+            qData.options.forEach((opt, idx) => {
+                const btn = document.createElement("button");
+                btn.className = "exam-option-btn";
+                btn.innerHTML = `<span>${opt}</span>`;
+                btn.onclick = () => selectExamOption(idx, btn);
+                optionsList.appendChild(btn);
+            });
+        }
+
+        const feedbackBox = document.getElementById("exam-feedback-box");
+        if (feedbackBox) feedbackBox.classList.add("hidden");
+        examState.hasAnswered = false;
+    } catch (e) { console.error(e); }
 }
 
 function selectExamOption(selectedIndex, btnElement) {
-    if (examState.hasAnswered) return;
-    examState.hasAnswered = true;
+    try {
+        if (examState.hasAnswered) return;
+        examState.hasAnswered = true;
 
-    const qData = examState.questions[examState.currentIndex];
-    let correctIdx = qData.answerIndex;
-    if (correctIdx === undefined && qData.answer) {
-        if (typeof qData.answer === 'string') {
-            correctIdx = qData.answer.trim().toUpperCase().charCodeAt(0) - 65;
-        } else {
-            correctIdx = parseInt(qData.answer);
+        const qData = examState.questions[examState.currentIndex];
+        let correctIdx = qData.answerIndex;
+        if (isNaN(correctIdx) || correctIdx < 0 || correctIdx > 3) correctIdx = 0;
+
+        const optionsList = document.getElementById("exam-options-list") || document.getElementById("options-list");
+        if (optionsList) {
+            const buttons = optionsList.querySelectorAll("button");
+            buttons.forEach(btn => btn.disabled = true);
+
+            const pointsPerQuestion = 100 / examState.questions.length;
+            const safeExplanation = qData.explanation;
+
+            const feedbackBox = document.getElementById("exam-feedback-box");
+            const fbTitle = document.getElementById("exam-feedback-title");
+            const fbText = document.getElementById("exam-feedback-text");
+
+            if (feedbackBox) {
+                feedbackBox.className = "exam-feedback-box";
+                if (selectedIndex === correctIdx) {
+                    btnElement.classList.add("correct");
+                    feedbackBox.classList.add("correct-box");
+                    if (fbTitle) fbTitle.innerText = "🎉 答對了！";
+                    if (fbText) fbText.innerHTML = safeExplanation;
+                    examState.score += pointsPerQuestion;
+                } else {
+                    btnElement.classList.add("wrong");
+                    if (buttons[correctIdx]) buttons[correctIdx].classList.add("correct");
+                    feedbackBox.classList.add("wrong-box");
+                    if (fbTitle) fbTitle.innerText = "❌ 答錯了！";
+
+                    if (!examState.wrongQuestions) examState.wrongQuestions = [];
+                    examState.wrongQuestions.push(qData);
+
+                    if (fbText) fbText.innerHTML = `正確答案為：【${qData.options[correctIdx]}】。<br><br>解析：${safeExplanation}`;
+
+                    // 動態盲點提示
+                    const bsKey = getBlindspotKey(qData.question);
+                    if (bsKey && BLINDSPOTS[bsKey]) {
+                        const bs = BLINDSPOTS[bsKey];
+                        fbText.innerHTML += `<div class="blindspot-cheatsheet-card" style="margin-top:16px; text-align:left;"><div class="blindspot-header"><span class="blindspot-title">${bs.title}</span><span class="blindspot-tag">${bs.tag}</span></div><div class="blindspot-content">${bs.content}</div></div>`;
+                    }
+                }
+                feedbackBox.classList.remove("hidden");
+            }
         }
-    }
-    if (isNaN(correctIdx) || correctIdx < 0 || correctIdx > 3) correctIdx = 0;
-
-    const buttons = document.querySelectorAll("#exam-options-list .exam-option-btn");
-    buttons.forEach(btn => btn.disabled = true);
-
-    const feedbackBox = document.getElementById("exam-feedback-box");
-    const fbTitle = document.getElementById("exam-feedback-title");
-    const fbText = document.getElementById("exam-feedback-text");
-    const fbRong = document.getElementById("exam-rong-treasure");
-
-    feedbackBox.className = "exam-feedback-box";
-    const pointsPerQuestion = 100 / examState.questions.length;
-    const safeExplanation = qData.explanation ? qData.explanation.replace(/\n/g, "<br>") : "請核對該題型之四技二專統一入學測驗標準官方題解。";
-
-    if (selectedIndex === correctIdx) {
-        btnElement.classList.add("correct");
-        feedbackBox.classList.add("correct-box");
-        fbTitle.innerText = "🎉 答對了！妳太厲害了！";
-        fbText.innerHTML = safeExplanation;
-        examState.score += pointsPerQuestion;
-    } else {
-        btnElement.classList.add("wrong");
-        if (buttons[correctIdx]) buttons[correctIdx].classList.add("correct");
-        feedbackBox.classList.add("wrong-box");
-        fbTitle.innerText = "❌ 答錯了！沒關係，大腦正在升級！";
-
-        if (!examState.wrongQuestions) { examState.wrongQuestions = []; }
-        examState.wrongQuestions.push(qData);
-
-        fbText.innerHTML = `正確答案為：【${qData.options[correctIdx]}】。<br><br>解析：${safeExplanation}`;
-
-        const bsKey = getBlindspotKey(qData.question);
-        if (bsKey && BLINDSPOTS[bsKey]) {
-            const bs = BLINDSPOTS[bsKey];
-            fbText.innerHTML += `
-                <div class="blindspot-cheatsheet-card" style="margin-top: 16px;">
-                    <div class="blindspot-header">
-                        <span class="blindspot-title">${bs.title}</span>
-                        <span class="blindspot-tag">${bs.tag}</span>
-                    </div>
-                    <div class="blindspot-content">${bs.content}</div>
-                </div>
-            `;
-        }
-    }
-
-    fbRong.innerText = qData.rongTreasure || "黃蓉老師叮嚀：統測專二看清會計時間位階與經濟彈性公式，分數就手到擒來！";
-    feedbackBox.classList.remove("hidden");
-
-    const nextBtn = document.getElementById("btn-next-exam-question");
-    if (nextBtn) {
-        nextBtn.innerText = (examState.currentIndex === examState.questions.length - 1) ? "查看總結成果 📊" : "下一題 →";
-    }
+        const nextBtn = document.getElementById("btn-next-exam-question");
+        if (nextBtn) nextBtn.innerText = (examState.currentIndex === examState.questions.length - 1) ? "查看總結成果 📊" : "下一題 →";
+    } catch (e) { console.error(e); }
 }
 
 function nextExamQuestion() {
-    if (examState.currentIndex === examState.questions.length - 1) {
-        showExamSummary();
-    } else {
-        examState.currentIndex++;
-        renderExamQuestion();
-    }
+    if (examState.currentIndex === examState.questions.length - 1) showExamSummary();
+    else { examState.currentIndex++; renderExamQuestion(); }
 }
 
 function showExamSummary() {
-    document.getElementById("exam-player-card").classList.add("hidden");
-    const resultsCard = document.getElementById("exam-results-card");
-    if (!resultsCard) return;
-    resultsCard.classList.remove("hidden");
+    try {
+        const playerCard = document.getElementById("exam-player-card") || document.querySelector(".player-card");
+        if (playerCard) playerCard.classList.add("hidden");
+        const resultsCard = document.getElementById("exam-results-card") || document.querySelector(".results-card");
+        if (resultsCard) resultsCard.classList.remove("hidden");
 
-    const finalScore = Math.min(Math.round(examState.score), 100);
-    document.getElementById("exam-results-score").innerText = finalScore;
+        const finalScore = Math.min(Math.round(examState.score), 100);
+        const scoreEl = document.getElementById("exam-results-score");
+        if (scoreEl) scoreEl.innerText = finalScore;
 
-    const descEl = document.getElementById("exam-results-desc");
-    if (descEl) {
-        if (finalScore === 100) descEl.innerText = "🏆 簡直完美！妳已經徹底征服了這個年份的統測精華考點！";
-        else if (finalScore >= 60) descEl.innerText = "👍 表現不錯！答對了大部分題目，再複習一下弱點卡片就可以拿滿分！";
-        else descEl.innerText = "💪 沒關係！錯題是最好的老師。多研讀黃蓉老師的解題大秘寶，再挑戰一次吧！";
-    }
-
-    let blindspotsHtml = "";
-    if (examState.wrongQuestions && examState.wrongQuestions.length > 0) {
-        const uniqueKeys = new Set();
-        examState.wrongQuestions.forEach(q => {
-            const key = getBlindspotKey(q.question);
-            if (key) uniqueKeys.add(key);
-        });
-
-        if (uniqueKeys.size > 0) {
-            blindspotsHtml = `
-                <div class="blindspot-compilation" style="text-align: left; margin-top: 24px;">
-                    <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--color-secondary); margin-bottom: 12px;">🎯 錯題對應：黃蓉老師的「統測關鍵盲點大補帖」</h3>
-            `;
-            uniqueKeys.forEach(key => {
-                const bs = BLINDSPOTS[key];
-                blindspotsHtml += `
-                    <div class="blindspot-cheatsheet-card">
-                        <div class="blindspot-header">
-                            <span class="blindspot-title">${bs.title}</span>
-                            <span class="blindspot-tag">${bs.tag}</span>
-                        </div>
-                        <div class="blindspot-content">${bs.content}</div>
-                    </div>
-                `;
-            });
-            blindspotsHtml += `</div>`;
+        const descEl = document.getElementById("exam-results-desc");
+        if (descEl) {
+            if (finalScore === 100) descEl.innerText = "🏆 完美！徹底征服統測考點！";
+            else if (finalScore >= 60) descEl.innerText = "👍 表現不錯！複習盲點拿滿分！";
+            else descEl.innerText = "💪 沒關係！研讀解析再戰一次！";
         }
-    }
 
-    let container = document.getElementById("exam-results-blindspots-container");
-    if (!container) {
-        container = document.createElement("div");
-        container.id = "exam-results-blindspots-container";
-        const actions = resultsCard.querySelector(".results-actions");
-        if (actions) resultsCard.insertBefore(container, actions);
-    }
-    container.innerHTML = blindspotsHtml;
+        const retryBtn = document.getElementById("btn-retry-exam");
+        if (retryBtn) retryBtn.onclick = () => loadPastExam(examState.currentYear);
 
-    const retryBtn = document.getElementById("btn-retry-exam");
-    if (retryBtn) retryBtn.onclick = () => loadPastExam(examState.currentYear);
-
-    userProgress.score += finalScore;
-    updateHeaderProgress();
+        userProgress.score += finalScore;
+        updateHeaderProgress();
+    } catch (e) { console.error(e); }
 }
