@@ -175,9 +175,8 @@ const accountingSubjects = [
 ];
 
 // 2. Application State Variables
-let currentTab = 'dashboard';
+let currentTab = 'past-exams'; // 預設直接開考古題
 let userProgress = { streak: 3, level: "LV.2 借貸練習生", completedWeeks: [1, 2, 3], currentWeek: 4, score: 150 };
-
 let ledger = {
     "現金": { debits: [], credits: [], type: "assets" },
     "辦公設備": { debits: [], credits: [], type: "assets" },
@@ -226,7 +225,7 @@ let activeLesson = { slides: [], currentIndex: 0 };
 // 3. App Initialization
 document.addEventListener("DOMContentLoaded", () => {
     initNavigation();
-    initDashboard();
+    initPastExams(); // 這裡改成直接載入考古題
     initMap();
     initSandbox();
     initCheatSheet();
